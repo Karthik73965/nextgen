@@ -1,0 +1,7 @@
+.mathjax-format {
+  white-space: pre-wrap; /* Preserves whitespace and line breaks */
+  font-family: monospace;
+  font-size: large; /* Typically used in <pre> for equal character width */
+  word-wrap: break-word; /* Ensures long lines do not create horizontal scroll */
+  overflow-x: hidden; /* Hides horizontal scroll */
+}
