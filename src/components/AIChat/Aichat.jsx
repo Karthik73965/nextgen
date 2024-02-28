@@ -10,19 +10,16 @@ import { useUserAuth } from "../../UserAuth"; // Assuming this hook provides use
 import ContentRenderer from "../MathJaxComponent";
 
 export default function Aichat() {
-  const lastMessageRef = useRef(null);
   const fileInputRef = useRef(null);
-  const [askMsg, setAskMsg] = useState(false);
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState([]);
   const [currentUrl, setCurrentUrl] = useState("");
-  const [taskID, setTaskID] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([
     {
-      text: "HI WELCOME BACK TO HERE DASTEK EDU YOU CAN ASK ANY QUESTIONS HERE",
-      sender: "server",
-    },
+      text: "Hey Buddy Welcome to Nextgen Study. This is Luna, How can i help you in your acedamics",
+      sender: 'server'
+    }
   ]);
   const [useLatex, setUseLatex] = useState(false);
 
@@ -132,19 +129,17 @@ export default function Aichat() {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex ${
-                msg.sender === "user" ? "justify-end" : "justify-start"
-              }`}
+              className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"
+                }`}
             >
               <div
-                className={`rounded-2xl px-4 max-w-[60vw] text-wrap my-5 py-2 ${
-                  msg.sender === "user"
-                    ? "min-w-[30vw] border-2 bg-green-100 border-black"
-                    : "border-2 min-w-[60vw] border-gray-700 bg-gray-100"
-                }`}
+                className={`rounded-2xl px-4 max-w-[60vw] text-wrap my-5 py-2 ${msg.sender === "user"
+                  ? "min-w-[30vw] border-2 bg-green-100 border-black"
+                  : "border-2 min-w-[60vw] border-gray-700 bg-gray-100"
+                  }`}
               >
                 {msg.sender === "server" ? (
-                  <div className="text-gradient font-bold">{" NextGen :"}</div>
+                  <div className="text-gradient font-bold">{" Nextgen :"}</div>
                 ) : (
                   <div className="text-gradient font-bold">{"You :"}</div>
                 )}
@@ -166,7 +161,7 @@ export default function Aichat() {
                 )}
                 {msg.sender === "server" &&
                   msg.text !==
-                    "HI WELCOME BACK TO HERE DASTEK EDU YOU CAN ASK ANY QUESTIONS HERE" && (
+                  "HI WELCOME BACK TO HERE DASTEK EDU YOU CAN ASK ANY QUESTIONS HERE" && (
                     <div className="flex gap-x-4 text-gray-700 mt-5">
                       <BiSolidLike size={20} />
                       <BiSolidDislike size={20} />
@@ -186,6 +181,13 @@ export default function Aichat() {
               ref={fileInputRef}
               onChange={handleFileChange}
               style={{ display: "none" }} // Hide the file input
+              className="block  text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-full file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-blue-50 file:text-blue-700
+                  hover:file:bg-blue-100 m-"
+
             />
             <button
               onClick={triggerFileInput}

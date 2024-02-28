@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { FaRegEye } from "react-icons/fa";
 
 const options = [
-    { id: 'best', title: 'Best Model', accuracy: '92%', icon: < FaRegEye className='m-1'/> },
-    { id: 'fast', title: 'Fast Model', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
-    { id: 'EASY', title: 'EASY Model', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
+    { id: 'best', title: 'Best Model - Precision Learning', accuracy: '92%', icon: < FaRegEye className='m-1'/> },
+    { id: 'fast', title: 'Fast Model - Instant Understanding', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
+    { id: 'EASY', title: 'EASY Model - User-Friendly Approach', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
+    { id: 'asd', title: 'Adaptive Learning - Customized Education', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
 
     // Add more options here if necessary
 ];
@@ -28,7 +29,7 @@ export default function OurVision() {
                                 {options.map((option) => (
                                     <button
                                         key={option.id}
-                                        className={`px-4 py-2 rounded-lg ${active === option.id ? 'bg-blackhover:bg-gradient-to-bl text-white' : 'bg-gray-200 text-gray-700'}`}
+                                        className={`px-4 py-2 rounded-lg ${active === option.id ? 'bg-black hover:bg-gradient-to-bl text-white' : 'bg-gray-200 text-gray-700'}`}
                                         onClick={() => handleClick(option.id)}
                                     >
                                         <div className='flex'>{option.icon}

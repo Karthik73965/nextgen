@@ -75,7 +75,7 @@ export default function SpecificHistory({activeOption,optionid}){
               <div className={`rounded-2xl px-4 py-2 my-5 ${msg.sender === 'user' ? '  border-2 border-black bg-green-100' : '  border-2 border-black bg-gray-200'}`}>
                 {
                   (msg.sender === 'server') &&  (msg.text !== 'HI WELCOME BACL TO HERE DASTEK EDU YOU CAN ASK ANY QUESTIONS HERES') &&
-                  <div className='text-gradient font-bold text-xl'>NexGen Study :-</div>
+                  <div className='text-gradient font-bold text-xl'>Nextgen Study :-</div>
 
                 }
                 {

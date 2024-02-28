@@ -1,9 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
-import { IoSend, IoImage } from "react-icons/io5";
+import { IoSend, IoImage, IoAttach } from "react-icons/io5";
 import DashboardNav from "./DashboardNav";
 import ContentRenderer from "../MathJaxComponent";
+import { HiArrowSmRight } from 'react-icons/hi';
 import { storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { BiSolidDislike, BiSolidLike } from 'react-icons/bi';
+import { FaCopy, FaShareFromSquare } from 'react-icons/fa6';
 
 const QuestionForm = ({ content }) => {
   const [question, setQuestion] = useState("");
@@ -16,6 +19,7 @@ const QuestionForm = ({ content }) => {
   const ws = useRef(null);
 
   useEffect(() => {
+    handleNewQuestion();
     connectWebSocket();
     return () => {
       if (ws.current) {
@@ -119,17 +123,15 @@ const QuestionForm = ({ content }) => {
             />
             <button
               type="submit"
-              className={`flex-shrink-0 ${
-                isLoading ? "text-gray-500" : "text-gray-700"
-              } py-1 px-2 rounded`}
+              className={`flex-shrink-0 ${isLoading ? "text-gray-500" : "text-gray-700"
+                } py-1 px-2 rounded`}
               disabled={isLoading}
             >
               {isLoading ? "Loading..." : <IoSend size={25} />}
             </button>
             <label
-              className={`flex-shrink-0 ${
-                isLoading ? "text-gray-500" : "text-gray-700"
-              } py-1 px-2 rounded cursor-pointer`}
+              className={`flex-shrink-0 ${isLoading ? "text-gray-500" : "text-gray-700"
+                } py-1 px-2 rounded cursor-pointer`}
             >
               <IoImage size={25} />
               <input
@@ -161,7 +163,24 @@ const QuestionForm = ({ content }) => {
               )}
             </div>
           )}
+          {data && useLatex && (
+            <div className='flex gap-x-4 text-gray-700 mt-5'>
+              <BiSolidLike size={20} />
+              <BiSolidDislike size={20} />
+              <FaCopy size={20} />
+              <FaShareFromSquare size={20} />
+            </div>
+          )}
         </form>
+        {data && useLatex && (
+          <button className="bg-black mt-8 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200  font-medium rounded-full text-sm px-5 py-2.5 text-center text-white"
+            onClick={handleNewQuestion}
+          >
+            <div className='flex items-center justify-center gap-x-3'>
+              One More Question ? <HiArrowSmRight size={20} />
+            </div>
+          </button>
+        )}
       </div>
     </>
   );

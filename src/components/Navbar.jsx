@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { TbMathSymbols } from "react-icons/tb";
 import { HiArrowSmRight } from "react-icons/hi";
-import "tailwindcss/tailwind.css";
+import 'tailwindcss/tailwind.css';
 import { useUserAuth } from "../UserAuth";
 
+
 const DropdownItem = ({ children }) => {
-  return (
-    <div className=" rounded-2xl mx-1 transition ease-in duration-300 p-2">
-      {children}
-    </div>
-  );
+    return (
+        <div className=" rounded-2xl mx-1 transition ease-in duration-300 p-2">
+            {children}
+        </div>
+    );
 };
 
 const Navbar = () => {
@@ -20,21 +21,21 @@ const Navbar = () => {
   const { isAuthenticated } = useUserAuth();
   const login = isAuthenticated(); // This should ideally be derived from your authentication state
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
 
-    window.addEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
   return (
     <header

@@ -14,6 +14,7 @@ import Login from "./pages/LogIn";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import { UserAuthContextProvider } from "./UserAuth";
+import CreateProfile from './pages/CreateProfile'
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         <Route exact path="/login" element={<Login />} />x
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/profileEdit" element={<ProfileEdit />} />
+      <Route exact  path='/CreateProfile' element={<CreateProfile/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </UserAuthContextProvider>

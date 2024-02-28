@@ -11,10 +11,10 @@ export default function Fotter() {
     <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-              <Link to="https:// NexGen Study.com/" className="flex items-center">
-                  {/* <img src="https:// NexGen Study.com/docs/images/logo.svg" className="h-8 me-3" alt=" NexGen Study Logo" /> */}
+              <Link to="https:// Nextgen Study.com/" className="flex items-center">
+                  {/* <img src="https:// Nextgen Study.com/docs/images/logo.svg" className="h-8 me-3" alt=" Nextgen Study Logo" /> */}
                   
-                  <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-700"> NexGen Study</span>
+                  <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-700"> Nextgen Study</span>
               </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -22,7 +22,7 @@ export default function Fotter() {
                   <h2 className="mb-6 text-sm font-semibold text-gray-700  uppercase ">Resources</h2>
                   <ul className="text-gray-500  font-medium">
                       <li className="mb-4">
-                          <Link to="https:// NexGen Study.com/" className="hover:underline"> NexGen Study</Link>
+                          <Link to="https:// Nextgen Study.com/" className="hover:underline"> Nextgen Study</Link>
                       </li>
                       <li>
                           <Link to="" className="hover:underline">blogs</Link>
@@ -33,7 +33,7 @@ export default function Fotter() {
                   <h2 className="mb-6 text-sm font-semibold text-gray-700  uppercase  ">Follow us</h2>
                   <ul className="text-gray-500  font-medium">
                       <li className="mb-4">
-                          <Link to="https://github.com/themesberg/ NexGen Study" className="hover:underline ">Github</Link>
+                          <Link to="https://github.com/themesberg/ Nextgen Study" className="hover:underline ">Github</Link>
                       </li>
                       <li>
                           <Link to="https://discord.gg/4eeurUVvTy" className="hover:underline">Discord</Link>
@@ -55,7 +55,7 @@ export default function Fotter() {
       </div>
       <hr className="my-6 border-gray-200 sm:mx-auto  lg:my-8" />
       <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center ">© 2024 <Link to="https:// NexGen Study.com/" className="hover:underline"> NexGen Study™</Link>. All Rights Reserved.
+          <span className="text-sm text-gray-500 sm:text-center ">© 2024 <Link to="https:// Nextgen Study.com/" className="hover:underline"> Nextgen Study™</Link>. All Rights Reserved.
           </span>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
               <Link to=" " className="text-gray-500 hover:text-gray-900 ">

@@ -21,10 +21,10 @@ const Sidebar = () => {
       
     <div className='min-h-[100vh]' style={{ display: 'flex', justifyContent: 'space-between' }}>
       <div className='h-[100px] mb-11'></div>
-      <div style={{ width: '20%', borderRight: '1px solid #ccc' }}>
+      <div style={{ width: '20%', background:"white", borderRight: '1px solid #ccc' }}>
       <div  className=' px-[40px] py-[10px] text-3xl font-bold ' >
                     <Link to="/">
-                        <h1 className='text  text-slate-900 mt-6 mb-3 mr-10'>NexGen Study</h1>
+                        <h1 className='text  text-slate-900  mb-3 mr-10'>Nextgen Study</h1>
                     </Link>
                 </div>
         <div className='text-gradient px-[40px] py-[10px] text-3xl font-bold mb-6 underline'>Chat-History</div>
