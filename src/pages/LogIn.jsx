@@ -11,11 +11,11 @@ export default function Login() {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/dashboard");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   const handleGoogleLogin = async () => {
     try {

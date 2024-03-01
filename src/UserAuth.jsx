@@ -45,9 +45,17 @@ export function UserAuthContextProvider({ children }) {
     }
   }
 
+  function getUid() {
+    if (user) {
+      return user.uid;
+    } else {
+      return "none";
+    }
+  }
+
   return (
     <userAuthContext.Provider
-      value={{ user, logIn, signUp, logOut, googleSignIn, isAuthenticated }}
+      value={{ user, logIn, signUp, logOut, googleSignIn, isAuthenticated, getUid }}
     >
       {children}
     </userAuthContext.Provider>

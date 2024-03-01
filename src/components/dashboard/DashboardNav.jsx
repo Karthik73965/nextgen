@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { TbMathSymbols } from "react-icons/tb";
 import { HiArrowSmRight } from "react-icons/hi";
@@ -7,6 +7,8 @@ import { CgProfile } from "react-icons/cg";
 import { SlLogin } from "react-icons/sl";
 import 'tailwindcss/tailwind.css';
 import { CgDetailsMore } from "react-icons/cg";
+import { useUserAuth } from "../../UserAuth";
+
 
 const DropdownItem = ({ children }) => {
     return (
@@ -20,6 +22,18 @@ const DashboardNav = ({ LOGO }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isProfileOpen, setIsprofileOpen] = useState(false);
+
+    const { logOut } = useUserAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        try {
+            logOut();
+            navigate("/login");
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -55,7 +69,7 @@ const DashboardNav = ({ LOGO }) => {
                         onMouseEnter={() => setIsDropdownOpen(true)}
                         onMouseLeave={() => setIsDropdownOpen(false)}
                     >
-                       <Link to={'/dashboard'}> <span className=" hover:text-green-700 transition text-xl font-bold ease-in duration-300">Subjects</span></Link>
+                        <Link to={'/dashboard'}> <span className=" hover:text-green-700 transition text-xl font-bold ease-in duration-300">Subjects</span></Link>
                         {isDropdownOpen ? <RiArrowDropUpLine className='m-[5px] transition-transform duration-300' /> : <RiArrowDropDownLine className='m-[5px] transition-transform duration-300' />}
 
                         {isDropdownOpen && (
@@ -130,7 +144,7 @@ const DashboardNav = ({ LOGO }) => {
                                 </Link>
 
 
-                                <div className='flex m-2 mx-2 transition ease-in duration-300 p-2 gap-2'>
+                                <div className='flex m-2 mx-2 transition ease-in duration-300 p-2 gap-2' onClick={handleLogout}>
                                     <SlLogin color='black' size={'25px'} />
                                     <div >Logout</div>
                                 </div>

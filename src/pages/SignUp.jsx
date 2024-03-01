@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import signupImg from "../assests/signup.png";
 import { useUserAuth } from "../UserAuth";
+import { auth } from "../firebase";
 import axios from "axios";
 
 export default function Signup() {
@@ -20,14 +21,14 @@ export default function Signup() {
 
   const [errors, setErrors] = useState({});
 
-  const { user, signUp } = useUserAuth();
+  const { user, signUp, getUid } = useUserAuth();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/dashboard");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user]);
 
   const nextStep = () => {
     setStep(step + 1);
@@ -135,8 +136,9 @@ export default function Signup() {
       try {
         await signUp(email, password);
         navigate("/dashboard");
+        const uid = auth.currentUser.uid;
         const data_obj = {
-          uid: user.uid,
+          uid: uid,
           username: userName,
           email: email,
           firstname: firstName,
@@ -147,6 +149,7 @@ export default function Signup() {
         };
 
         const resp = await axios.post("http://localhost:5000/users", data_obj);
+        console.log(resp);
       } catch (error) {
         console.error(error);
       }
@@ -273,9 +276,8 @@ export default function Signup() {
                   <label className="font-bold "> What is your Gender :</label>
                   <div className="flex justify-around my-2  ">
                     <div
-                      className={`${
-                        gender === "male" ? "bg-gray-300" : ""
-                      }  rounded-full border-2  p-3`}
+                      className={`${gender === "male" ? "bg-gray-300" : ""
+                        }  rounded-full border-2  p-3`}
                       onClick={() => {
                         setGender("male");
                       }}
@@ -283,9 +285,8 @@ export default function Signup() {
                       Male
                     </div>
                     <div
-                      className={`${
-                        gender === "female" ? "bg-gray-300" : ""
-                      } rounded-full  border-2  p-3`}
+                      className={`${gender === "female" ? "bg-gray-300" : ""
+                        } rounded-full  border-2  p-3`}
                       onClick={() => {
                         setGender("female");
                       }}
@@ -293,9 +294,8 @@ export default function Signup() {
                       Female
                     </div>
                     <div
-                      className={`${
-                        gender === "denied" ? "bg-gray-300" : ""
-                      } rounded-full border-2 p-3`}
+                      className={`${gender === "denied" ? "bg-gray-300" : ""
+                        } rounded-full border-2 p-3`}
                       onClick={() => {
                         setGender("denied");
                       }}
@@ -309,9 +309,8 @@ export default function Signup() {
                   </label>
                   <div className="flex justify-around my-2  ">
                     <div
-                      className={`${
-                        standard === "10th" ? "bg-gray-300" : ""
-                      }  rounded-full  border-2  p-3`}
+                      className={`${standard === "10th" ? "bg-gray-300" : ""
+                        }  rounded-full  border-2  p-3`}
                       onClick={() => {
                         setStandard("10th");
                       }}
@@ -319,9 +318,8 @@ export default function Signup() {
                       10 th
                     </div>
                     <div
-                      className={`${
-                        standard === "ug" ? "bg-gray-300" : ""
-                      } rounded-full  border-2  p-3`}
+                      className={`${standard === "ug" ? "bg-gray-300" : ""
+                        } rounded-full  border-2  p-3`}
                       onClick={() => {
                         setStandard("ug");
                       }}
@@ -329,9 +327,8 @@ export default function Signup() {
                       UG
                     </div>
                     <div
-                      className={`${
-                        standard === "grad" ? "bg-gray-300" : ""
-                      } rounded-full  border-2  p-3`}
+                      className={`${standard === "grad" ? "bg-gray-300" : ""
+                        } rounded-full  border-2  p-3`}
                       onClick={() => {
                         setStandard("grad");
                       }}

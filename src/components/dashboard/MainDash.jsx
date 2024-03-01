@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GrSafariOption } from "react-icons/gr";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import Subjechatbot from '../../components/dashboard/Subjectchatbot';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DashboardNav from './DashboardNav';
 import { BiSolidDislike, BiSolidLike } from 'react-icons/bi';
 import { FaCopy, FaShareFromSquare } from 'react-icons/fa6';
@@ -10,6 +10,7 @@ import { TbMathSymbols } from "react-icons/tb";
 import { FaPeopleArrows } from "react-icons/fa";
 import { MdEngineering } from "react-icons/md";
 import { IoLanguageSharp } from "react-icons/io5";
+import { useUserAuth } from '../../UserAuth';
 
 const Mathoptions = [
   { name: 'Mathematics', content: 'maths', },
@@ -52,6 +53,15 @@ const Sidebar = () => {
   useEffect(() => {
     console.log("subject", activesubject);
   }, [activesubject]);
+
+  const { user } = useUserAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user]);
 
   return (
     <>

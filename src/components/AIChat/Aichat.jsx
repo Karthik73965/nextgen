@@ -8,6 +8,7 @@ import { storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useUserAuth } from "../../UserAuth"; // Assuming this hook provides user authentication context
 import ContentRenderer from "../MathJaxComponent";
+import { useNavigate } from "react-router-dom";
 
 export default function Aichat() {
   const fileInputRef = useRef(null);
@@ -24,7 +25,16 @@ export default function Aichat() {
   const [useLatex, setUseLatex] = useState(false);
 
   const ws = useRef(null);
-  const { user } = useUserAuth(); // Assuming this is how you access the current user
+
+  const { user } = useUserAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user]);
+
 
   useEffect(() => {
     // Establish the WebSocket connection
