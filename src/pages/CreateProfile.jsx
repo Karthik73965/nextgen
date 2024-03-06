@@ -12,12 +12,12 @@ export default function CreateProfile() {
     
     <Navbar />
       <div className='h-20'></div> {/* Use standard spacing units */}
-      <div className="flex justify-center">
+      <div className="flex m-8 justify-center">
         <div className='flex min-h-[60vh] border-[2.5px] shadow-2xl w-full max-w-4xl mx-auto border-black rounded-xl'>
-          <section className='w-1/2 border-r-[2.5px] border-black'>
+          <section className='w-1/2 border-r-[2.5px] hidden sm:block border-black'>
         <Slider />
           </section>
-          <section className='w-1/2 p-8'>
+          <section className='sm:w-1/2 p-8'>
             
           <div>
                 <h2 className='text-3xl font-semibold text-center mb-8'>

@@ -5,8 +5,6 @@ body{
     padding: 0;
 }
 #algn{
-    height: 92vh;
-    min-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +12,7 @@ body{
 
 #card{
     width: 90vw;
-    height: 600px;
+    height: 1000px;
     border: none;
     border-radius: 15px;
     overflow: hidden;
@@ -37,7 +35,7 @@ body{
     border-radius: 50%;
     padding: 3px;
     position: absolute;
-    top: 40px;
+    top:45%;
 }
 
 #lower-bg{
@@ -131,3 +129,15 @@ body{
     padding: 0 10px;
     display: inline;
 }   
+@media screen and (max-width: 768px) {
+    .profile-pic{
+        width:60%;
+        background-color: white;
+        border: 3px solid #FFE400;
+        border-radius: 50%;
+        padding: 3px;
+        position: absolute;
+        top: 40%;
+    }
+ 
+    }

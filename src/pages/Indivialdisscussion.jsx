@@ -11,7 +11,7 @@ export default function Individualdisscussion() {
   const [inputValue, setInputValue] = useState('');
   const fileInputRef = useRef(null);
   const username= "username"
-
+  const length = window.innerWidth
   const handleFilechange = (event) => {
     // Handle the file change event
     // You can access the selected files using event.target.files
@@ -80,8 +80,10 @@ const [messages, setMessages]= useState([{
   }
   return (
     <>
-      <Dashnav LOGO={true} />
-      <div className='h-[100px]'></div>
+     {
+        length > 768 ? <Dashnav LOGO={true} /> : <Dashnav />
+      }
+      <div className='h-[120px]'></div>
       <section className='border-2 border-black  mx-3 rounded-2xl p-3  shadow-2xl'>
         <div className=' rounded-lg p-3 '>
           <h1 className=' text-gray-900 font-semibold text-2xl p-1'><u className=' font-bold'>Question-</u> {ThreadInfo.title}</h1>
@@ -127,11 +129,11 @@ const [messages, setMessages]= useState([{
             </button>
           </div>
         {messages.map((msg, index) => (
-            <div key={index} className={`flex  ${msg.sender === username ? 'justify-end ' : 'justify-start'}`}>
-              <div className={`rounded-lg px-4 py-2 border border-black my-1 ${msg.sender === 'username' ? '  bg-green-100' : 'bg-gray-100'}`}>
-                <div className='font-bold uppercase rounded-xl text-gradient border-black '>{msg.sender}:-<span className='text-gray-700'>{msg.createdAt}</span></div>
-                <div className='px-3 font-semibold'>{msg.Comment}</div>
-
+            <div key={index} className={`flex w-[50vw]  sm:w-auto  ${msg.sender === username ? 'justify-end ml-[30vw] sm:ml-0 ' : '  justify-start'}`}>
+              <div className={`rounded-lg px-4 py-2 text-sm border border-black my-1 ${msg.sender === 'username' ? '  bg-green-100' : 'bg-gray-100'}`}>
+                <div className='font-bold uppercase rounded-xl text-sm text-gradient border-black '>{msg.sender}:-<span className='text-gray-700 text-sm'>{msg.createdAt}</span></div>
+                <div className='sm:px-3 font-semibold text-sm sm:text-balance'>{msg.Comment}</div>
+z
                 {
                   (msg.sender !== username) &&  (msg.text !== 'HI WELCOME BACL TO HERE DASTEK EDU YOU CAN ASK ANY QUESTIONS HERES') &&
                   <div className='flex gap-x-4 text-gray-700 mt-5'>

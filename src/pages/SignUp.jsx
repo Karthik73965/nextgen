@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import signupImg from "../assests/signup.png";
+import signupImg from "../assests/signup/signup.png";
 import { useUserAuth } from "../UserAuth";
 import { auth } from "../firebase";
+import Navbar from '../components/Navbar';
 import axios from "axios";
 
 export default function Signup() {
@@ -158,6 +159,7 @@ export default function Signup() {
 
   return (
     <>
+      <Navbar />
       <div className="h-20"></div> {/* Use standard spacing units */}
       <div className="flex items-center justify-end w-full max-w-4xl mx-auto rounded-xl pe-5 pb-2">
         {/* Display error messages here if any */}
@@ -346,6 +348,7 @@ export default function Signup() {
                     id="insName"
                     placeholder="Enter Institute name"
                     className="border w-full p-2 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500"
+                    value={institute}
                     onChange={(e) => setInstitute(e.target.value)}
                   />
                   <div className="flex justify-between items-center">
@@ -356,7 +359,7 @@ export default function Signup() {
                         className="mx-2"
                         name="checkbox"
                         value={acceptTnC}
-                        onClick={() => setAcceptTnC(!acceptTnC)}
+                        onChange={(e) => setAcceptTnC(e.target.checked)}
                       />
                       <label htmlFor="termsAndConditions">
                         Agree to our terms and conditions

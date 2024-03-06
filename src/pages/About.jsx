@@ -9,10 +9,9 @@ export default function About() {
   return (
     <div className='bg'>
     <Navbar/>
-    <div className='h-[100px]'></div>
+    <div className='h-[120px]'></div>
     <Whatis/>
-    <Problems/>
-    <OurVision/>
+        <OurVision/>
     <DasTEk/>
     </div>
   )

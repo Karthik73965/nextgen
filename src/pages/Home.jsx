@@ -1,19 +1,21 @@
 import React from 'react'
-import Hero from '../components/Home/Hero'
-import VideoSection from '../components/Home/VideoSection'
-import Subjects from '../components/Home/Subjects'
-import Reviews from '../components/Home/Reviews'
-import Feautures from '../components/Home/Feautures'
+import Hero from '../components/home/Hero'
+import VideoSection from '../components/home/VideoSection'
+import Subjects from '../components/home/Subjects'
+import Reviews from '../components/home/Reviews'
+import Feautures from '../components/home/Feautures'
 import Fotter from '../components/Fotter'
 import Navbar from '../components/Navbar'
+import Problems from '../components/About/Problems'
 export default function Home() {
   return (
    <>
    <Navbar/>
     <div  className=''>
-      <div className='h-[100px]'></div>
-      <Hero/>
+      <div className='h-[120px]'></div>
+      <Hero/> 
       <VideoSection/>
+      <Problems/>
       <Subjects/>
       <Reviews/>
       <Feautures/>

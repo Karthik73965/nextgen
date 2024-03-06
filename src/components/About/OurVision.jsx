@@ -1,68 +1,35 @@
-import React, { useState } from 'react'
-import { FaRegEye } from "react-icons/fa";
+import React from 'react'
+import { RiRegisteredLine } from "react-icons/ri";
+import vision from '../../assests/about/vision.webp'
+import { GiClawHammer } from "react-icons/gi";
+import { Link } from 'react-router-dom';
+import { HiArrowSmRight } from 'react-icons/hi';
+import { BiLowVision } from "react-icons/bi";
 
-const options = [
-    { id: 'best', title: 'Best Model - Precision Learning', accuracy: '92%', icon: < FaRegEye className='m-1'/> },
-    { id: 'fast', title: 'Fast Model - Instant Understanding', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
-    { id: 'EASY', title: 'EASY Model - User-Friendly Approach', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
-    { id: 'asd', title: 'Adaptive Learning - Customized Education', accuracy: '70%', icon: <FaRegEye className='m-1' /> },
-
-    // Add more options here if necessary
-];
-export default function OurVision() {
-    const [active, setActive] = useState(options[0].id);
-
-    const handleClick = (optionId) => {
-        setActive(optionId);
-    };
-
+export default function DasTEk() {
     return (
         <>
             <main className='mx-6 border-4 p-4 shadow-2xl rounded-xl my-4'>
-                <h2 className='flex justify-start align-middle text-3xl text-slate-900  font-bold gap-2'><FaRegEye className='m-1' />
-                    Our Vision -</h2>
-                <section className='px-6 m-6'>
-                    <div className="container mx-auto">
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="flex space-x-4">
-                                {/* Option buttons */}
-                                {options.map((option) => (
-                                    <button
-                                        key={option.id}
-                                        className={`px-4 py-2 rounded-lg ${active === option.id ? 'bg-black hover:bg-gradient-to-bl text-white' : 'bg-gray-200 text-gray-700'}`}
-                                        onClick={() => handleClick(option.id)}
-                                    >
-                                        <div className='flex'>{option.icon}
-                                        <span>{option.title}</span></div>
-                                    </button>
-                                ))}
-                            </div>
-                            <div className="mt-4 p-4 rounded shadow-md">
-                                {/* Content based on the active option */}
-                                {active === 'best' && (
-                                    <div>
-                                        <h3 className="text-lg font-semibold">Quickly Generate AI Solutions for All Assignments</h3>
-                                        <p>Tackle assignment questions with StudyX AI: Our Best Model powered by GPT-4 is 92% accurate.</p>
-                                    </div>
-                                )}
-                                {active === 'fast' && (
-                                    <div>
-                                        <h3 className="text-lg font-semibold">Fast AI Solutions for Assignments</h3>
-                                        <p>Get quicker results with Fast Model powered by ChatGPT which is 70% accurate.</p>
-                                    </div>
-                                )}
-                                {/* Add more conditionals for additional options */}
-                                {active === 'EASY' && (
-                                    <div>
-                                        <h3 className="text-lg font-semibold">Fast AI Solutions for Assignments</h3>
-                                        <p>Get quicker results withsdfsdf Fast Model powered by ChatGPT which is 70% accurate.</p>
-                                    </div>
-                                )}
-                                
-                            </div>
-                        </div>
+                <h3 className='flex align-middle justify-start font-bold text-3xl mt-3 '> <BiLowVision size={40}  className='mb-3' />
+                    Our vision </h3>
+                    <div className='grid sm:flex justify-around  align-middle'>
+                    <center className='my-6 sm:w-[50%]   '>
+                        <img src={vision} className='rounded-lg size-[95%]'/>
+                    </center>
+                    <div className='m-3 sm:mt-12  text-sm sm:text-lg text-gray-700   sm:w-[50%] sm:mx-6'>Our vision at NexGen Study AI is to be the catalyst for a global educational transformation. We envision a future where every student is equipped with the knowledge and skills to excel academically and beyond. Our platform is more than just a tool for getting homework done—it's a bridge to academic excellence and a lifetime of learning. We are committed to democratizing education, offering an expansive suite of learning tools that spark curiosity, encourage critical thinking, and foster deep understanding. Our vision is to create a world where learners are no longer intimidated by challenging subjects and can instead approach their studies with confidence, curiosity, and a sense of adventure. Through NexGen Study AI, we are building a community of empowered learners ready to tackle the challenges of the future.<center>
+                           <Link to={'/login'} >
+                           <button type="button" className="relative text-white bg-black hover:bg-gradient-to-bl mt-4 focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ring-animation">
+                                <div className='flex items-center  justify-center text-lg gap-x-3'>
+                                    Get starteed free  <HiArrowSmRight size={30} />
+                                </div>
+                                <div className="absolute top-0 right-0 bottom-0 left-0 rounded-lg" style={{ animation: 'ring-animation 2s infinite' }}></div>
+                            </button>
+                           </Link>
+                        </center>
+</div>
+   
                     </div>
-                </section>
+                  
             </main>
         </>
     )

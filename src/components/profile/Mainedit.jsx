@@ -9,8 +9,8 @@ import { IoSchoolSharp } from "react-icons/io5";
 
 
 export default function Mainedit() {
-    const fileInputRef = useRef(null);
-    const profilerf = useRef(null)
+  const fileInputRef = useRef(null);
+  const profilerf = useRef(null)
   const [profile, setProfile] = useState({
     email: '',
     dateOfBirth: '',
@@ -21,25 +21,25 @@ export default function Mainedit() {
     // You can access the selected files using event.target.files
     console.log(event.target.files);
     // ... additional code to handle the files
-};
+  };
 
 
-const triggerFileInput = () => {
+  const triggerFileInput = () => {
     // Trigger the file input click event
     fileInputRef.current.click(); x
-};
-const handleprofilechange = (event) => {
+  };
+  const handleprofilechange = (event) => {
     // Handle the file change event
     // You can access the selected files using event.target.files
     console.log(event.target.files);
     // ... additional code to handle the files
-};
+  };
 
 
-const triggerprofileInput = () => {
+  const triggerprofileInput = () => {
     // Trigger the file input click event
     fileInputRef.current.click(); x
-};
+  };
 
   useEffect(() => {
     // Fetch data from the server
@@ -76,123 +76,78 @@ const triggerprofileInput = () => {
     <>
       <main className='m-10 p-10'>
         <center>
-          <div className='bg-yellow-400 rounded-xl w-[90%] h-[200px] text-2xl p-8 font-bold flex '>
-             
-          <input
-                       type="file"
-                       ref={fileInputRef}
-                       onChange={handleFilechange}
-                       style={{ display: 'none' }} // Hide the file input
-                       className="block  text-sm text-gray-500
+          <div className='bg-yellow-400 rounded-xl w-[60vw] sm:w-[90vw] h-[200px] text-2xl p-8 font-bold flex '>
+
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFilechange}
+              style={{ display: 'none' }} // Hide the file input
+              className="block  text-sm text-gray-500
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-full file:border-0
                   file:text-sm file:font-semibold
                   file:bg-blue-50 file:text-blue-700
                   hover:file:bg-blue-100 m-"
-                        // Remove this if you want only single file selection
-                   />
+            // Remove this if you want only single file selection
+            />
             change your background color <HiOutlinePencil onClick={triggerFileInput} size={30} className='m-' />
           </div>
         </center>
-        
-        <section className='ml-20 flex justify-around m-10'>
+
+        <section className='sm:ml-20   items-center   grid sm:flex justify-around align-middle  m-10'>
           <div>
-          <input
-                       type="file"
-                       ref={profilerf}
-                       onChange={handleprofilechange}
-                       style={{ display: 'none' }} // Hide the file input
-                       className="block  text-sm text-gray-500
+            <input
+              type="file"
+              ref={profilerf}
+              onChange={handleprofilechange}
+              style={{ display: 'none' }} // Hide the file input
+              className="block  text-sm text-gray-500
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-full file:border-0
                   file:text-sm file:font-semibold
                   file:bg-blue-50 file:text-blue-700
                   hover:file:bg-blue-100 m-"
-                        // Re
-                       />
-            <img src="https://nasemul1.github.io/my-portfolio/profile-pic.png" className='h-36 'onClick={triggerprofileInput} alt="profile-pic" />
+            // Re
+            />
+            <img src="https://nasemul1.github.io/my-portfolio/profile-pic.png" className='h-36 ml-9 mb-9 sm:ml-0 ' onClick={triggerprofileInput} alt="profile-pic" />
           </div>
-          <section className='m-11'>
-            <div className='w-[50vw] text-xl mb-14 flex justify-between space-x-10'>
-              <div className='flex gap-x-5'>
-                <span><MdMan4 size={30} className='' /></span>
-                <input
-                  type="email"
-                  name="email"
-                  value={"value"}
-                  onChange={handleChange}
-                  className='border-b-4 border-gray-300'
-                />
-              </div>
-              <div className='flex gap-x-5'>
-                <span><MdEmail size={30} className='' /></span>
-                <input
-                  type="email"
-                  name="email"
-                  value={"value"}
-                  onChange={handleChange}
-                  className='border-b-4 border-gray-300'
-                />
-              </div>
-              <div className='flex gap-x-5'>
-                <span><BsFillCalendarDateFill size={30} className='' /></span>
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  value={profile.dateOfBirth}
-                  onChange={handleChange}
-                  className='border-b-4 border-gray-300'
-                />
-              </div>
-              {/* ... repeat input fields for other profile data */}
-            </div>
-            <div className='w-[50vw] text-xl mb-14 flex justify-between space-x-10'>
-              <div className='flex gap-x-5'>
-                <span><RiLockPasswordFill
- size={30} className='' /></span>
-                <input
-                  type="email"
-                  name="email"
-                  value={"value"}
-                  onChange={handleChange}
-                  className='border-b-4 border-gray-300'
-                />
-              </div>
-              <div className='flex gap-x-5'>
-                <span><BiSolidInstitution 
- size={30} className='' /></span>
-                <input
-                  type="email"
-                  name="email"
-                  value={"value"}
-                  onChange={handleChange}
-                  className='border-b-4 border-gray-300'
-                />
-              </div>
-              <div className='flex gap-x-5'>
-                <span><IoSchoolSharp  
- size={30} className='' /></span>
-                <input
-                  type="email"
-                  name="email"
-                  value={"value"}
-                  onChange={handleChange}
-                  className='border-b-4 border-gray-300'
-                />
-              </div>
-              
-              {/* ... repeat input fields for other profile data */}
-            </div>
+          <section className='sm:m-11 h-64'>
+                            <div className='w-[50vw] text-xl mb-14 grid  sm:flex justify-between   sm:space-x-10'>
+                                <div className='flex my-3 gap-x-5'>
+                                    <span><MdEmail size={30} className='' /></span>
+                                    <span className='border-b-4 border-gray-300'>your @mail.com</span>
+                                </div>
+                                <div className='flex my-3 gap-x-5'>
+                                    <span><BsFillCalendarDateFill size={30} className=' ml-0' /></span>
+                                    <span className='border-b-4 border-gray-300'>Date of birth</span>
+                                </div>
+                                <div className='flex my-3 gap-x-5'>
+                                    <span><BsFillCalendarDateFill size={30} className='' /></span>
+                                    <span className='border-b-4 border-gray-300'>Date of birth</span>
+                                </div>
 
-            <div className='w-[50vw] text-xl  flex justify-between space-x-10'>
-              {/* ... repeat input fields for other profile data */}
-            </div>
-            <center className='mt-14'>
-              <button type='button' className='mt-6 text-xl bg-black flex gap-x-3 rounded-full text-white px-10 py-3' onClick={handleSubmit}>
-                Update your profile <HiOutlinePencil size={20} className='m-1' />
-              </button>
-            </center>
-          </section>
+                            </div>
+
+                            <div className='w-[50vw] text-xl  grid  sm:flex justify-between sm:space-x-10'>
+                                <div className='flex my-3 gap-x-5'>
+                                    <span><MdEmail size={30} className='' /></span>
+                                    <span className='border-b-4 border-gray-300'>Academic Standard</span>
+                                </div>
+                                <div className='flex my-3 gap-x-5'>
+                                    <span><BsFillCalendarDateFill size={30} className='' /></span>
+                                    <span className='border-b-4 border-gray-300'>Male</span>
+                                </div>
+                                <div className='flex my-3 gap-x-5'>
+                                    <span><BsFillCalendarDateFill size={30} className='' /></span>
+                                    <span className='border-b-4 border-gray-300'>Institution</span>
+                                </div>
+                            </div>
+                           
+                                <button type='button' className='mt-6 text-xl bg-black flex gap-x-3 rounded-full text-white px-10 py-3'>
+                                Update    <HiOutlinePencil size={20} className='m-1' />
+                            </button>
+                        </section>
         </section>
       </main>
     </>

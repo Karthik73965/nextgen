@@ -16,9 +16,9 @@ const ContentDisplay = ({ category }) => {
         <>
             <section className='m-8 px-3 grid sm:flex'>
                 <div className='text-wrap flex-1 p-4 '>
-                    <div className='text-4xl text-gradient h font-bold my-2'>{category.heading}</div>
+                    <div className='sm:text-4xl text-xl text-gradient h font-bold my-2'>{category.heading}</div>
                     {/* <div className='text-xl font-semibold my-2'>{category.heading}</div> */}
-                    <div className='text-xl  text-slate-600 font-semibold my-2 '> {category.description}"</div>
+                    <div className='sm:text-xl text-sm  text-slate-600 font-semibold my-2 '> {category.description}"</div>
                    
                     <button type="button" className="relative text-white bg-blackhover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-lg mt-8 px-5 py-2.5 text-center ring-animation">
                         <div className='flex items-center justify-center gap-x-3'>
@@ -52,25 +52,27 @@ const VideoSection = () => {
     });
 
     return (
-        <div className='mx-10 mt-24'>
+        <div className='md:mx-10 mt-24'>
             {isMobile ? (
-                <select
+             <center className='text-2xl'>
+                   <select
                     value={selectedCategory.key}
                     onChange={(e) => setSelectedCategory(categories.find(cat => cat.key === e.target.value))}
                 >
                     {categories.map((category) => (
-                        <option key={category.key} value={category.key}>
+                        <option key={category.key}value={category.key}>
                             {category.name}
                         </option>
                     ))}
                 </select>
+             </center>
             ) : (
                 <center>
-                    <div className='flex justify-center align-middle mx-8  border-gray-300border- border-4 p-1 py-3 rounded-full '>
+                    <div className='flex justify-center align-middle mx-8  border-gray-300 border- border-4 p-1 py-3 rounded-full '>
                         {categories.map((category) => (
-                            <button className="inline-flex items-center bg-black text-white justify-center  n   rounded-full  p-3 py-4 mx-4 text-xl" onClick={() => setSelectedCategory(category)}>
+                            <button className="inline-flex items-center bg-black text-white justify-center mx-10 py-2 px-1  rounded-full   " onClick={() => setSelectedCategory(category)}>
                                 <span className="relative mx-2 transition-all ease-in duration-75 bg-black  rounded-md group-hover:bg-opacity-0">
-                                    {category.name}
+                                   <span className='text-sm md:text-2xl'>{category.name}</span>
                                 </span>
                             </button>
                         ))}
