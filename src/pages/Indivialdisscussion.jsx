@@ -5,6 +5,7 @@ import { MdAddToPhotos } from "react-icons/md";
 import { BiSolidDislike, BiSolidLike } from 'react-icons/bi'
 import { FaCopy, FaShareFromSquare } from 'react-icons/fa6'
 import { BsSendPlusFill } from "react-icons/bs";
+import Navbar from '../components/Navbar.jsx';
 
 
 export default function Individualdisscussion() {
@@ -80,10 +81,8 @@ const [messages, setMessages]= useState([{
   }
   return (
     <>
-     {
-        length > 768 ? <Dashnav LOGO={true} /> : <Dashnav />
-      }
-      <div className='h-[120px]'></div>
+     <Navbar postion={"dash"}/>
+     <div className='h-[90px]'></div>
       <section className='border-2 border-black  mx-3 rounded-2xl p-3  shadow-2xl'>
         <div className=' rounded-lg p-3 '>
           <h1 className=' text-gray-900 font-semibold text-2xl p-1'><u className=' font-bold'>Question-</u> {ThreadInfo.title}</h1>

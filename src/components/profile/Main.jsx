@@ -3,15 +3,18 @@ import { MdEmail } from "react-icons/md";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { HiOutlinePencil } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
-
+import female from '../../assests/female.jpeg'
+import male from '../../assests/male.jpeg'
 
 export default function Main() {
+
+    const gender = "asdf"
     return (
         <>
             <div className='h-auto' id="algn">
                 <div id="card" className='shadow-2xl ' >
                     <div id="upper-bg">
-                        <img src="https://nasemul1.github.io/my-portfolio/profile-pic.png" alt="profile-pic" class="profile-pic " />
+                        <img src={gender == "male" ? male :female} alt="profile-pic" class="profile-pic " />
                     </div>
                     <div id="lower-bg">
                         <div class="text sm:mt-12">

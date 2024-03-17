@@ -7,6 +7,9 @@ import Feautures from '../components/home/Feautures'
 import Fotter from '../components/Fotter'
 import Navbar from '../components/Navbar'
 import Problems from '../components/About/Problems'
+// import Review from '../components/utils/Review'
+import Review from '../components/Home/Reviews'
+
 export default function Home() {
   return (
    <>
@@ -14,11 +17,11 @@ export default function Home() {
     <div  className=''>
       <div className='h-[120px]'></div>
       <Hero/> 
-      <VideoSection/>
-      <Problems/>
+      {/* <VideoSection/> */}
       <Subjects/>
-      <Reviews/>
+      <Problems/>
       <Feautures/>
+      <Review/>
       <Fotter/>
     </div>
    </>

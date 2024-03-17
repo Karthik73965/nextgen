@@ -3,10 +3,12 @@ import { Dialog } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 import DashboardNav from '../components/dashboard/DashboardNav';
 import { BsSendPlusFill } from "react-icons/bs";
+import Navbar from '../components/Navbar';
 
 
 const DiscussionPage = () => {
   const fileInputRef = useRef(null);
+  const [Error , SetError] = useState(false)
   const { name, value } = (e) => e.target;
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -41,7 +43,7 @@ const DiscussionPage = () => {
   const handleSubmit = async () => {
     // Validate input data
     if (!newDiscussion.title || !newDiscussion.tags.length) {
-      alert('Please fill in all fields.');
+      SetError(true)
       return;
     }
 
@@ -94,16 +96,14 @@ const DiscussionPage = () => {
 
   return (
     <div className='overflow-x-hidden'>
-      {
-        length > 768 ? <DashboardNav  LOGO={true} /> : <DashboardNav  />
-      }
-      <div className='h-[150px]'></div>
+     <Navbar postion={"dash"}/>
+     <div className='h-[70px]'></div>
       <div className="container  mx-auto mt-4 p-4 w-[80vw] sm:w-auto min-h-screen border-2 border-black  rounded-lg">
         {/* Modal for new discussion */}
         <Dialog open={isModalOpen} onClose={closeModal} className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen">
             <Dialog.Overlay className=" bg-gray-500 bg-opacity-75 transition-opacity" />
-            <div className="bg-white rounded-lg p-4 sm:w-[90vw]">
+            <div className="bg-gray-200 rounded-lg p-4 sm:w-[90vw]">
               <div className="text-2xl mb-4 text-gradient font-bold">Create New Discussion</div>
               <input
                 type="text"
@@ -154,6 +154,7 @@ const DiscussionPage = () => {
                   Upload Files
                 </button>
               </div>
+              {Error ? <div className='text-red-500 text-xl font-semibold m-3'> *Please fill in all fields.</div>:""}
               <button onClick={handleSubmit} className="px-4 py-2 bg-black text-white rounded-full">Post</button>
               <button onClick={closeModal} className="px-4 py-2 ml-2 bg-gray-700 text-white rounded-lg">Cancel</button>
             </div>
@@ -166,16 +167,16 @@ const DiscussionPage = () => {
               Discussions
             </div>
             {/* More tabs... */}
-          </div>
+          </div >
           {/* Search box */}
-          <div className='flex justify-between '>
-            <input type="text" placeholder="Search question" className="px-4 py-2 border-2 w-[45vw] sm:w-auto  mr-4 border-black rounded-lg" />
+          <div className='flex flex-wrap justify-between '>
+            <input type="text" placeholder="Search question" className="px-4 py-2 border-2 w-[50%] sm:w-auto  mr-4 border-black rounded-lg" />
             <div>
             <button onClick={openModal} className="px-3 bg-black font-bold ml-[3] text-white rounded-lg  h-10"><div className='flex p-2'>Post<BsSendPlusFill className='m-1 mx-2' /></div>
             </button>
+        
           </div>
           </div>
-         
         </div>
         {/* Discussions list */}
 

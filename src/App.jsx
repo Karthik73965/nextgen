@@ -18,7 +18,7 @@ import { UserAuthContextProvider } from "./UserAuth";
 import SuperTokens from 'supertokens-web-js';
 import Session from 'supertokens-web-js/recipe/session';
 import ThirdPartyEmailPassword from 'supertokens-web-js/recipe/thirdpartyemailpassword'
-
+import Faq from'./pages/Faq'
 SuperTokens.init({
     appInfo: {
         apiDomain: "http://localhost:5000",
@@ -50,6 +50,7 @@ export default function App() {
       <Route exact  path='/profile' element={<Profile/>} />
       <Route exact  path='/profileEdit' element={<ProfileEdit/>} />
       <Route exact  path='/CreateProfile' element={<CreateProfile/>} />
+      <Route exact  path='/Faq' element={<Faq/>} />
       <Route
              path="*"
              element={<PageNotFound />}

@@ -161,10 +161,10 @@ export default function Signup() {
     <>
       <Navbar />
       <div className="h-20"></div> {/* Use standard spacing units */}
-      <div className="flex items-center justify-end w-full max-w-4xl mx-auto rounded-xl pe-5 pb-2">
+      <div className="flex mt-20 sm:mt-10 items-center justify-end w-full max-w-4xl sm:mx-auto rounded-xl pe-5 pb-2">
         {/* Display error messages here if any */}
         {Object.keys(errors).length > 0 && (
-          <div className="p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-xl">
+          <div className="p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-xl  animate-fadeIn">
             <ul>
               {Object.values(errors).map((error, index) => (
                 <li key={index}>{error}</li>
@@ -175,7 +175,7 @@ export default function Signup() {
       </div>
       <div className="flex justify-center pb-10">
         <div className="flex min-h-[60vh] border-[2.5px] shadow-2xl w-full max-w-4xl mx-auto border-black rounded-xl">
-          <section className="w-1/2 border-r-[2.5px] border-black">
+          <section className="sm:w-1/2 border-r-[2.5px] hidden sm:block border-black">
             {/* slider component will go here */}
             <img
               src={signupImg}
@@ -183,7 +183,7 @@ export default function Signup() {
               className="object-cover w-full h-full"
             />
           </section>
-          <section className="w-1/2 p-8">
+          <section className="sm:w-1/2 p-8">
             {step === 1 && (
               // Step 1 form inputs
               <div>

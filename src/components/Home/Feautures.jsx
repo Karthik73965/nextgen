@@ -19,10 +19,10 @@ import { Link } from 'react-router-dom';
 export default function Feautures() {
     return (
         <>
-            <main className='m-8 sm:mb-20 feautures rounded-xl p-10  shadow-2xl   mt-20 '>
+            <main className='m-8 mt-0 rounded-xl'>
                 <h3 className='sm:text-4xl text-xl font-bold text-gradient flex justify-center text align-middle'>Feautures that will make your study more productive </h3>
-                <center className='flex justify-center text-sm align-middle font-semibold text-gray-700   m-3'>Empower your education with on-demand expertise and community-driven support – all at no cost, available round the clock</center>
-                <section className='sm:flex grid justify-around  sm:px-10 sm:py-5 sm:m-8 border-2 border-black rounded-3xl'>
+                <center className='flex justify-center text-sm align-middle font-semibold text-gray-700  '>Empower your education with on-demand expertise and community-driven support – all at no cost, available round the clock</center>
+                <section className='lg:flex grid justify-around  sm:px-10 sm:py-5 sm:m-8 border-2 border-black rounded-3xl'>
                 
                     <ul className='sm:p-3 justify-start'>
                         <li className='sm:m-5  my-2 mt-5 font-semibold font-slate-600 text-sm sm:text-xl    '><div className='flex align-middle '><FaUnlockAlt   className=' m-1 mr-2' size={30} />Completely Free - No cost, full access to all academic resources.</div></li>
@@ -48,7 +48,7 @@ export default function Feautures() {
 
                     <div className='grid'>
                     {/* <img src={roboto} className=' absolute z-200  h-[400px] top- '/> */}
-                        <img src={right} className=' rounded-xl w-[270px] my-3 mx-1 bord border-blue-400 h-[300px] sm:h-[550px] '/>
+                        <img src={right} className=' rounded-xl w my-3 mx-1 bord border-blue-400 size-[85%]  '/>
                         
                     </div>
                 </section>

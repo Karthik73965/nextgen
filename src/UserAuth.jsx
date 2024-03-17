@@ -27,6 +27,13 @@ export function UserAuthContextProvider({ children }) {
     const googleAuthProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleAuthProvider);
   }
+  const [options, setOptions] = useState("maths");
+
+  const setOption = (optionName,) => {
+    setOptions(optionName);
+  }
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
@@ -55,10 +62,11 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user, logIn, signUp, logOut, googleSignIn, isAuthenticated, getUid }}
+      value={{ user, logIn, signUp, logOut, googleSignIn, isAuthenticated, getUid, options, setOption }}
     >
       {children}
     </userAuthContext.Provider>
+
   );
 }
 

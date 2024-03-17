@@ -129,11 +129,15 @@ const length = window.innerWidth
    
   return (
    <>
-      <Dashnav  />
-      <div className='h-[74px]'></div>
-     {
-      length > 768 ? <><div className="flex flex-col h-[80vh] bg-transparent sticky sm:h-[88vh]">
+    
+    
+      <><div className="flex flex-col  bg-transparent sticky sm:h-[100vh]">
       <div className="overflow-auto p-3 mt-10 flex-grow">
+      <Drawer open={open} onClose={toggleDrawer(false)}>
+              {DrawerList}
+            </Drawer>
+            <div className='p-3  md:hidden bg-white border-2 flex border-black rounded-xl w-[200px] mb-6 ml-[50vw] ' onClick={toggleDrawer(true)}>All history  <RxPencil2 className='ml-10' size={25} />
+            </div>
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`rounded-2xl px-4 py-2 my-5 ${msg.sender === 'user' ? '  border-2 border-black bg-green-100' : '  border-2 border-black bg-gray-200'}`}>
@@ -155,37 +159,7 @@ const length = window.innerWidth
       </div>
     </div>
 
-      </> : <><div className="flex flex-col h-[100vh] bg-transparent sticky sm:h-[88vh]">
-      <div className='p-3 bg-white border-2 flex border-black rounded-xl w-[200px] mb-6 ml-[50vw] ' onClick={toggleDrawer(true)}>All history  <RxPencil2 className='ml-10' size={25} />
-            </div>
-            <Drawer open={open} onClose={toggleDrawer(false)}>
-              {DrawerList}
-            </Drawer>
-      <div className="overflow-auto mx-3  mt-10 flex-grow">
-        {messages.map((msg,  index) => (
-          <div key={index} className={`flex   sm:w-auto  ${msg.sender === 'user' ? 'ml-[30vw] justify-end ' : ' justify-start mr-[20vw]'}`}>
-            <div className={`rounded-2xl px-4 py-2 my-5 ${msg.sender === 'user' ? '  border-2 border-black bg-green-100' : '  border-2 border-black bg-gray-200'}`}>
-              {
-                (msg.sender === 'server') &&  (msg.text !== 'HI WELCOME BACL TO HERE DASTEK EDU YOU CAN ASK ANY QUESTIONS HERES') &&
-                <div className='text-gradient font-bold text-xl'>NexgenStudy :-</div>
-
-              }
-              {
-                (msg.sender === 'user')  &&
-                <span className="  transition ease-in duration-300  font-bold  "><span className='flex align-middle justify-start text-gradient font-bold text-xl' > <CgProfile className='m-1 text-black' size={20} />
-                profile</span></span>
-
-              }
-              {msg.text}
-            </div>
-          </div>
-        ))}
-      </div>
-   
-    </div>
-
       </> 
-     } 
    </>
   )
 }
