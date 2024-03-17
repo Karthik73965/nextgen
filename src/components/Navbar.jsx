@@ -197,7 +197,7 @@ const Navbar = ({ postion }) => {
                             <Link to="/login">
                                 <button
                                     type="button"
-                                    className="bg-black  font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white"
+                                    className="bg-black ml-9  font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white"
                                 >
                                     <div className="flex items-center justify-center gap-x-3">
                                         Start for free <HiArrowSmRight size={20} />
@@ -282,7 +282,7 @@ const Navbar = ({ postion }) => {
                                                     type="button"
                                                     className="bg-black  font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white"
                                                 >
-                                                    <div className="flex items-center justify-center gap-x-3">
+                                                    <div className="flex items-center justify-center  gap-x-3">
                                                         Start for free <HiArrowSmRight size={20} />
                                                     </div>
                                                 </button>
