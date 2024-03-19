@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { HiArrowSmRight } from 'react-icons/hi';
 import { IoSend, IoImage, IoAttach, IoLockClosedSharp } from 'react-icons/io5';
-import DashboardNav from './DashboardNav';
 import { BiSolidDislike, BiSolidLike } from 'react-icons/bi';
 import { FaCopy, FaShareFromSquare } from 'react-icons/fa6';
 import * as React from 'react';
@@ -24,21 +23,19 @@ import img from '../../assests/Logo.png'
 import { storage } from "../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import ContentRenderer from "../MathJaxComponent";
-import { useUserAuth } from '../../UserAuth';
-  {/* imports for specific subject icons */}
-  import { GiAtom } from 'react-icons/gi';
-  import { GiChemicalDrop } from 'react-icons/gi';
-  import { GiDna1 } from 'react-icons/gi';
-  import { FaBook } from 'react-icons/fa';
-  {/* imag e for loader  */}
-  import note from '../../assests/note.jpeg'
+import { GiAtom } from 'react-icons/gi';
+import { GiChemicalDrop } from 'react-icons/gi';
+import { GiDna1 } from 'react-icons/gi';
+import { FaBook } from 'react-icons/fa';
+{/* imag e for loader  */ }
+import note from '../../assests/note.jpeg'
 
 const Mathoptions = [
-  { name: 'Maths', content: 'maths', component :<TbMathSymbols size={20} className='m-1'/>},
-  { name: 'Physics  ', content: 'physics',component :<GiAtom size={30} className='m-1'/> },
-  { name: 'Chemistry', content: 'chemistry',component :<GiChemicalDrop size={30} className='m-1'/> },
-  { name: 'Biology', content: 'biology', component :<GiDna1 size={30} className='m-1'/>},
-  { name: 'English', content: 'english ',component :<FaBook size={30} className='m-1'/> },
+  { name: 'Maths', content: 'maths', component: <TbMathSymbols size={20} className='m-1' /> },
+  { name: 'Physics  ', content: 'physics', component: <GiAtom size={30} className='m-1' /> },
+  { name: 'Chemistry', content: 'chemistry', component: <GiChemicalDrop size={30} className='m-1' /> },
+  { name: 'Biology', content: 'biology', component: <GiDna1 size={30} className='m-1' /> },
+  { name: 'English', content: 'english ', component: <FaBook size={30} className='m-1' /> },
 ];
 // const Socialoptions = [
 //   { name: 'History', content: 'history', },
@@ -76,7 +73,6 @@ const QuestionForm = ({ content }) => {
   const [activeOption, setActiveOption] = useState("maths"); // Added state to track active option
   const [endpoint, setendpoint] = useState(content)
   const [activesubject, setactivesubject] = useState("Maths")
-  const { options, setOption } = useUserAuth()
   const [currentUrl, setCurrentUrl] = useState("");
   const [useLatex, setUseLatex] = useState(false);
   const [connectionError, setConnectionError] = useState("");
@@ -140,32 +136,32 @@ const QuestionForm = ({ content }) => {
 
       {/*---------- maths-----------  */}
       <div
-            className={`m-[15px]  ml-0 mb-0  rounded-xl ${activeOption=='maths'?"  ":""}  pb-3 pt-1`} // Conditional styling
-            style={{ cursor: 'pointer' }}
-            onClick={() => {
-              //   setActiveContent(option.content);
-              setActiveOption("maths");
-            }}
-          >
-            {/* <div className='m-3 rounded-lg text-xl p-1 font-semibold justify-stretch  flex gap-x-2'>
+        className={`m-[15px]  ml-0 mb-0  rounded-xl ${activeOption == 'maths' ? "  " : ""}  pb-3 pt-1`} // Conditional styling
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          //   setActiveContent(option.content);
+          setActiveOption("maths");
+        }}
+      >
+        {/* <div className='m-3 rounded-lg text-xl p-1 font-semibold justify-stretch  flex gap-x-2'>
               <TbMathSymbols className='-2' size={30} />
             <div className='text-[18px] '><span>Maths</span> <span>& Science</span></div>
               <div>
               </div>
             </div> */}
-            {
-              activeOption === "maths" ? <div className='mx-4 '>
-                {Mathoptions.map((option) => (
-                  <div className={`rounded-full  p-1  my-4  flex border-[3px] border-black ] gap-x-2  ${activesubject == option.name ? "  bg-gray-400  p-1  text-black" : ""} ml-8 my- text-2xl`}  key={option.name}> 
-                  {option.component}
-                  <div className='flex '>
-                    <div className=' text-[18px]'>{option.name}</div> <div> {option.name != "Maths" ?  <IoLockClosedSharp size={15} className="m-2" />:""}</div>
-                  </div>
-                  </div>
-                ))}
-              </div> : ""
-            }
-          </div>
+        {
+          activeOption === "maths" ? <div className='mx-4 '>
+            {Mathoptions.map((option) => (
+              <div className={`rounded-full  p-1  my-4  flex border-[3px] border-black ] gap-x-2  ${activesubject == option.name ? "  bg-gray-400  p-1  text-black" : ""} ml-8 my- text-2xl`} key={option.name}>
+                {option.component}
+                <div className='flex '>
+                  <div className=' text-[18px]'>{option.name}</div> <div> {option.name != "Maths" ? <IoLockClosedSharp size={15} className="m-2" /> : ""}</div>
+                </div>
+              </div>
+            ))}
+          </div> : ""
+        }
+      </div>
       {/*---------- Sociail -----------  */}
       {/* <div
         className={`m-[15px]  ml-0 mb-0  rounded-xl ${activeOption == 'Social' ? "  " : ""}  pb-3 pt-1`} // Conditional styling
@@ -255,7 +251,7 @@ const QuestionForm = ({ content }) => {
       const messageData = JSON.stringify({
         message: question,
         image_url: currentUrl,
-        subject: options,
+        subject: "",
       });
       ws.current.send(messageData);
     } else {
@@ -289,8 +285,8 @@ const QuestionForm = ({ content }) => {
 
       <div className='overflow-x-hidden'>
         <div className='h-[30px]'></div>
-         <>
-         <div className='grid items-center  '>
+        <>
+          <div className='grid items-center  '>
             <div className='p-3 bg-white  sm:hidden  border-2 text-sm flex border-black rounded-xl w-[40vw] mb-6 ml-[50vw] ' onClick={toggleDrawer(true)}>Change Subject <RxPencil2 className='ml-2' size={25} />
             </div>
             <Drawer open={open} onClose={toggleDrawer(false)}>
@@ -300,86 +296,86 @@ const QuestionForm = ({ content }) => {
               {activesubject == "Civil" || activesubject == "Chemical" || activesubject == "Electrical" || activesubject == "Mechanical" || activesubject == "IndustrialW" ? `${activesubject} Enginerring` : activesubject}
             </h1>
             </center>
-         
+
             <h1 className="text-lg sm:text-4xl hidden sm:block  font-bold mb-4 text-gradient" >The evolution of 24/7 study starts here</h1>
             <p className="mb-4 text-slate-900 text-wrap font-bold hidden sm:block">Any question. Any subject. Get instant, step-by-step solutions the moment you need them.</p>
           </div>
-            {connectionError && <p className="text-red-500 text-center">{connectionError}</p>}
-          </>
-        
+          {connectionError && <p className="text-red-500 text-center">{connectionError}</p>}
+        </>
+
         {/* below input part------------------------------------- */}
-          <div className="flex     flex-col items-center justify-center p-4">
-            {currentUrl && <img src={currentUrl} alt="Selected" />}
+        <div className="flex     flex-col items-center justify-center p-4">
+          {currentUrl && <img src={currentUrl} alt="Selected" />}
 
-            <form className="w-[90vw]   " onSubmit={handleSubmit}>
-              <div>
-              </div>
-              <div className="flex items-center  border-2 border-black w-[90vw] sm:w-[70vw] px- py-1 rounded-2xl mb-4">
-                <input
-                  class="appearance-none bg-transparent  w-full text-gray-900 mr-3 py-1 px-2 leading-tight focus:outline-none h-16 "
-                  type="text"
-                  placeholder="What's your question?"
-                  aria-label="Question input"
-                  value={question}
-                  onChange={(e) => setQuestion(e.target.value)}
-                  disabled={isLoading}
-                />
+          <form className="w-[90vw]   " onSubmit={handleSubmit}>
+            <div>
+            </div>
+            <div className="flex items-center  border-2 border-black w-[90vw] sm:w-[70vw] px- py-1 rounded-2xl mb-4">
+              <input
+                class="appearance-none bg-transparent  w-full text-gray-900 mr-3 py-1 px-2 leading-tight focus:outline-none h-16 "
+                type="text"
+                placeholder="What's your question?"
+                aria-label="Question input"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                disabled={isLoading}
+              />
 
-                <button
-                  type="submit"
-                  className={`flex-shrink-0 ${isLoading ? 'text-gray-500' : 'text-gray-700'} text-md py-1 px-2 rounded`}
-                  disabled={isLoading}
-                >
-                   <IoSend size={25} />
-                </button>
-                <label className={`flex-shrink-0 ${isLoading ? 'text-gray-500' : 'text-gray-700'} text-md py-1 px-2 rounded`}>
-                  <IoImage size={25} />
-                  <input type="file" className="hidden" onChange={handleImageUpload} disabled={isLoading} />
-                </label>
-              </div>
-              {isLoading && <img src={note} loading='lazy'/>}
-              {data && (
-                <div
-                  className="data-display bg-gray-200 p-3 rounded-lg"
-                  style={{ maxWidth: "100%", overflowX: "auto" }}
-                >
-                  {useLatex ? (
-                    <ContentRenderer text={data} />
-                  ) : (
-                    <pre
-                      style={{
-                        whiteSpace: "pre-wrap",
-                        wordWrap: "break-word",
-                        overflowX: "hidden",
-                      }}
-                    >
-                      {data}
-                    </pre>
-                  )}
-                </div>
-              )}
-              {data && useLatex && (
-                <div className='flex gap-x-4 text-gray-700 mt-5'>
-                  <BiSolidLike size={20} />
-                  <BiSolidDislike size={20} />
-                  <FaCopy size={20} />
-                  <FaShareFromSquare size={20} />
-                </div>
-              )}
-
-            </form>
-
-            {data && !isLoading && (
-              <button className="bg-black mt-8 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200  font-medium rounded-full text-sm px-5 py-2.5 text-center text-white"
-                onClick={handleNewQuestion}
+              <button
+                type="submit"
+                className={`flex-shrink-0 ${isLoading ? 'text-gray-500' : 'text-gray-700'} text-md py-1 px-2 rounded`}
+                disabled={isLoading}
               >
-                <div className='flex items-center justify-center gap-x-3'>
-                  One More Question ? <HiArrowSmRight size={20} />
-                </div>
+                <IoSend size={25} />
               </button>
+              <label className={`flex-shrink-0 ${isLoading ? 'text-gray-500' : 'text-gray-700'} text-md py-1 px-2 rounded`}>
+                <IoImage size={25} />
+                <input type="file" className="hidden" onChange={handleImageUpload} disabled={isLoading} />
+              </label>
+            </div>
+            {isLoading && <img src={note} loading='lazy' />}
+            {data && (
+              <div
+                className="data-display bg-gray-200 p-3 rounded-lg"
+                style={{ maxWidth: "100%", overflowX: "auto" }}
+              >
+                {useLatex ? (
+                  <ContentRenderer text={data} />
+                ) : (
+                  <pre
+                    style={{
+                      whiteSpace: "pre-wrap",
+                      wordWrap: "break-word",
+                      overflowX: "hidden",
+                    }}
+                  >
+                    {data}
+                  </pre>
+                )}
+              </div>
             )}
-          </div>
-      
+            {data && useLatex && (
+              <div className='flex gap-x-4 text-gray-700 mt-5'>
+                <BiSolidLike size={20} />
+                <BiSolidDislike size={20} />
+                <FaCopy size={20} />
+                <FaShareFromSquare size={20} />
+              </div>
+            )}
+
+          </form>
+
+          {data && !isLoading && (
+            <button className="bg-black mt-8 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200  font-medium rounded-full text-sm px-5 py-2.5 text-center text-white"
+              onClick={handleNewQuestion}
+            >
+              <div className='flex items-center justify-center gap-x-3'>
+                One More Question ? <HiArrowSmRight size={20} />
+              </div>
+            </button>
+          )}
+        </div>
+
       </div>
     </>
   );

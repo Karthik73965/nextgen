@@ -15,7 +15,6 @@ const MathJaxComponent = ({ text }) => {
     // Convert line breaks to <br> and spaces to &nbsp;
     return boldedText
       .split("\n")
-      .map((line) => line.replace(/ /g, "\u00A0"))
       .join("<br/>");
   };
 

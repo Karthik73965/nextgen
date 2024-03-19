@@ -1,5 +1,4 @@
 import React,{useRef, useState} from 'react'
-import Dashnav from '../components/dashboard/DashboardNav.jsx'
 import image from '../assests/robo.jpg'
 import { MdAddToPhotos } from "react-icons/md"; 
 import { BiSolidDislike, BiSolidLike } from 'react-icons/bi'

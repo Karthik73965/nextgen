@@ -1,4 +1,3 @@
-import Dashnav from '../dashboard/DashboardNav'
 import React, { useState, useRef, useEffect } from 'react';
 import { IoSendSharp } from "react-icons/io5";
 import { MdAddToPhotos } from "react-icons/md";

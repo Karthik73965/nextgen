@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Link } from 'react-router-dom';
-import DashboardNav from '../components/dashboard/DashboardNav';
 import { BsSendPlusFill } from "react-icons/bs";
 import Navbar from '../components/Navbar';
 

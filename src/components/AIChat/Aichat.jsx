@@ -1,4 +1,3 @@
-import Dashnav from '../dashboard/DashboardNav'
 import React, { useState, useRef } from 'react';
 import { IoSendSharp } from "react-icons/io5";
 import { MdAddToPhotos } from "react-icons/md";
@@ -72,7 +71,7 @@ export default function Aichat() {
     };
   return (
    <>
-      <Dashnav LOGO={true} />
+      {/* <Dashnav LOGO={true} /> */}
       <div className='h-[74px]'></div>
       <div className="flex flex-col h-[80vh] bg-transparent sticky sm:h-[88vh]">
         <div className="overflow-auto p-3 flex-grow">

@@ -6,6 +6,10 @@ import { auth } from "../firebase";
 import Navbar from '../components/Navbar';
 import axios from "axios";
 
+import { emailPasswordSignUp } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import { doesSessionExist } from "supertokens-auth-react/recipe/session";
+
+
 export default function Signup() {
   const [step, setStep] = useState(1);
   const [gender, setGender] = useState("");
@@ -22,14 +26,62 @@ export default function Signup() {
 
   const [errors, setErrors] = useState({});
 
-  const { user, signUp, getUid } = useUserAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
+    const checkSession = async () => {
+      const sessionExists = await doesSessionExist();
+      // Immediately act on the session existence check
+      if (sessionExists) {
+        navigate("/dashboard");
+      }
+    };
+
+    checkSession();
+  }, [navigate]);
+
+  async function signUpClicked(email, password) {
+    try {
+      let response = await emailPasswordSignUp({
+        formFields: [{
+          id: "email",
+          value: email
+        }, {
+          id: "password",
+          value: password
+        }]
+      })
+
+      if (response.status === "FIELD_ERROR") {
+        // one of the input formFields failed validaiton
+        response.formFields.forEach(formField => {
+          if (formField.id === "email") {
+            // Email validation failed (for example incorrect email syntax),
+            // or the email is not unique.
+            window.alert(formField.error)
+          } else if (formField.id === "password") {
+            // Password validation failed.
+            // Maybe it didn't match the password strength
+            window.alert(formField.error)
+          }
+        })
+      } else if (response.status === "SIGN_UP_NOT_ALLOWED") {
+        // this can happen during automatic account linking. Tell the user to use another
+        // login method, or go through the password reset flow.
+      } else {
+        // sign up successful. The session tokens are automatically handled by
+        // the frontend SDK.
+        window.location.href = "/dashboard"
+      }
+    } catch (err) {
+      if (err.isSuperTokensGeneralError === true) {
+        // this may be a custom error message sent from the API by you.
+        window.alert(err.message);
+      } else {
+        window.alert("Oops! Something went wrong.\n" + err);
+      }
     }
-  }, [user]);
+  }
 
   const nextStep = () => {
     setStep(step + 1);
@@ -135,7 +187,7 @@ export default function Signup() {
       nextStep();
     } else if (step == 2 && validateF2Fields()) {
       try {
-        await signUp(email, password);
+        await signUpClicked(email, password);
         navigate("/dashboard");
         const uid = auth.currentUser.uid;
         const data_obj = {
@@ -149,8 +201,8 @@ export default function Signup() {
           institute: institute,
         };
 
-        const resp = await axios.post("http://localhost:5000/users", data_obj);
-        console.log(resp);
+        // const resp = await axios.post("http://localhost:5000/users", data_obj);
+        // console.log(resp);
       } catch (error) {
         console.error(error);
       }

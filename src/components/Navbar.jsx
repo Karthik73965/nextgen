@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { TbMathSymbols } from "react-icons/tb";
 import { HiArrowSmRight } from "react-icons/hi";
@@ -15,12 +15,10 @@ import { GiAtom } from 'react-icons/gi';
 import { GiChemicalDrop } from 'react-icons/gi';
 import { GiDna1 } from 'react-icons/gi';
 import { FaBook } from 'react-icons/fa';
-
-
-
-import { useUserAuth } from "../UserAuth";
 import { SlLogin } from 'react-icons/sl';
 
+import { doesSessionExist } from "supertokens-auth-react/recipe/session";
+import Session from "supertokens-auth-react/recipe/session";
 const DropdownItem = ({ children }) => {
     return (
         <div className="hover:text-green-500 hover:bg-blue-100 rounded-2xl  mx-2 transition ease-in duration-300 p-2">
@@ -32,19 +30,39 @@ const DropdownItem = ({ children }) => {
 const Navbar = ({ postion }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const { isAuthenticated } = useUserAuth();
+
     const [isProfileOpen, setIsprofileOpen] = useState(false)
-    const login = isAuthenticated(); // This should ideally be derived from your authentication state
     const [onclick, setonclick] = useState(false)
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const [login, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const sessionExists = await doesSessionExist();
+            console.log(sessionExists);
+            setIsLoggedIn(sessionExists);
+
+            const noRedirectPaths = ["/", "/faq", "/About", "/signup"];
+
+            if (!sessionExists && !noRedirectPaths.includes(location.pathname)) {
+                navigate("/login");
+            }
+        };
+
+        checkSession();
+    }, [navigate, location.pathname]);
 
     const handleonclick = () => {
         setonclick(!onclick)
         console.log(onclick);
     }
-    const handleLogout = () => {
+    const handleLogout = async () => {
         try {
-            logOut();
-            setTimeout(() => { }, 3000);
+            await Session.signOut();
+            console.log("TEST");
             navigate("/login");
         } catch (error) {
             console.error(error);
@@ -234,7 +252,7 @@ const Navbar = ({ postion }) => {
                                     <Link to={'/dashboard'}><div>Subjects</div></Link>
                                     {/* <Link to={'/aichat'}><div>Luna chat </div></Link> */}
                                     <Link to={'/faq'} className={`${postion == "dash" ? "hidden" : "block"}`}>
-                                      <span>FAQ's</span>
+                                        <span>FAQ's</span>
                                     </Link>
                                     <Link to={'/About'} className={`${postion == "dash" ? "hidden" : "block"}`} >
                                         <span>About</span>
@@ -242,7 +260,7 @@ const Navbar = ({ postion }) => {
 
                                     {/*for dash*/}
                                     <Link to={'/discussions'} className={`${postion !== "dash" ? "hidden" : "block"}`}>
-                                    <span>Discussions</span>
+                                        <span>Discussions</span>
                                     </Link>
                                     <Link to={'/chathistory'} className={`${postion !== "dash" ? "hidden" : "block"}`} >
                                         <span>History</span>
@@ -250,32 +268,32 @@ const Navbar = ({ postion }) => {
 
                                     <div className='grid w-64 mt-8'>
                                         {login ? (
-                                          <>
-                                          {
-                                            postion !=="dash"  ? <Link to="/dashboard">
-                                            <button className="bg-black border-4 border-gray-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white">
-                                                <div className="flex items-center justify-center gap-x-3">
-                                                    Dashboard <HiArrowSmRight size={20} />
-                                                </div>
-                                            </button>
-                                        </Link>  : <>
-                                        <Link to="/profile">
-                                                <button className="bg-black border-4 font-medium rounded-xl text-sm px-5 py-2.5 text-center text-white">
-                                                    <div className="flex items-center justify-center gap-x-3">
-                                                    <CgProfile size={20} className='m-1' />Profile
-                                                    </div>
-                                                </button>
-                                            </Link>
-                                        <Link onclick={handleLogout} >
-                                                <button className="bg-black border-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white">
-                                                <div className='flex items-center justify-center gap-x-3" '><SlLogin color='white' className=' mr-4' size={20} />
-                                                        <div >Logout</div></div>
-                                                </button>
-                                            </Link>
+                                            <>
+                                                {
+                                                    postion !== "dash" ? <Link to="/dashboard">
+                                                        <button className="bg-black border-4 border-gray-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white">
+                                                            <div className="flex items-center justify-center gap-x-3">
+                                                                Dashboard <HiArrowSmRight size={20} />
+                                                            </div>
+                                                        </button>
+                                                    </Link> : <>
+                                                        <Link to="/profile">
+                                                            <button className="bg-black border-4 font-medium rounded-xl text-sm px-5 py-2.5 text-center text-white">
+                                                                <div className="flex items-center justify-center gap-x-3">
+                                                                    <CgProfile size={20} className='m-1' />Profile
+                                                                </div>
+                                                            </button>
+                                                        </Link>
+                                                        <Link onclick={handleLogout} >
+                                                            <button className="bg-black border-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white">
+                                                                <div className='flex items-center justify-center gap-x-3" '><SlLogin color='white' className=' mr-4' size={20} />
+                                                                    <div >Logout</div></div>
+                                                            </button>
+                                                        </Link>
 
-                                        </>
-                                          }
-                                          </>
+                                                    </>
+                                                }
+                                            </>
                                         ) : (
                                             <Link to="/login">
                                                 <button
