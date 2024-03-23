@@ -7,12 +7,12 @@ async function handleGoogleCallback() {
 
         if (response.status === "OK") {
             console.log(response.user)
-            if (response.createdNewRecipeUser && response.user.loginMethods.length === 1) {
-                // sign up successful
+            if (response.createdNewRecipeUser && response.user.loginMethods.length == 1) {
+                window.location.assign("/createprofile");
             } else {
                 // sign in successful
+                window.location.assign("/dashboard");
             }
-            window.location.assign("/dashboard");
         } else if (response.status === "SIGN_IN_UP_NOT_ALLOWED") {
             // this can happen due to automatic account linking. Please see our account linking docs
         } else {

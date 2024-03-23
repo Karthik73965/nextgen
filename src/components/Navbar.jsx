@@ -45,10 +45,10 @@ const Navbar = ({ postion }) => {
             console.log(sessionExists);
             setIsLoggedIn(sessionExists);
 
-            const noRedirectPaths = ["/", "/faq", "/About", "/signup"];
+            const noRedirectPaths = ["/", "/faq", "/About", "/signup", "/createprofile", "/callback/google"];
 
             if (!sessionExists && !noRedirectPaths.includes(location.pathname)) {
-                navigate("/login");
+                navigate("/login")
             }
         };
 

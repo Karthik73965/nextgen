@@ -78,7 +78,21 @@ const QuestionForm = ({ content }) => {
   const [connectionError, setConnectionError] = useState("");
   const ws = useRef(null);
 
+  const [actionTaken, setActionTaken] = useState('');
 
+  const handleLike = () => {
+    if (!actionTaken) {
+      setActionTaken('liked');
+      // Perform additional actions here if needed
+    }
+  };
+
+  const handleDislike = () => {
+    if (!actionTaken) {
+      setActionTaken('disliked');
+      // Perform additional actions here if needed
+    }
+  };
 
   useEffect(() => {
     handleNewQuestion();
@@ -90,7 +104,9 @@ const QuestionForm = ({ content }) => {
     };
   }, [content]);
 
+
   const connectWebSocket = () => {
+
     ws.current = new WebSocket("ws://localhost:5000/chat");
     ws.current.onopen = () => {
       console.log("Server Connected");
@@ -216,7 +232,10 @@ const QuestionForm = ({ content }) => {
       </div> */}
       {/*---------- Languages  -----------  */}
       {/* <div
-        className={`m-[15px]  ml-0 mb-0 ${activeOption == 'Lang' ? "  " : ""} rounded-xl  pb-3 pt-1`} // Conditional styling
+        className={`m-[15  useEffect(() => {
+    const session = useSessionContext();
+    console.log(session.userId)
+  }, []);px]  ml-0 mb-0 ${activeOption == 'Lang' ? "  " : ""} rounded-xl  pb-3 pt-1`} // Conditional styling
         style={{ cursor: 'pointer' }}
         onClick={() => {
           //   setActiveContent(option.content);
@@ -257,6 +276,15 @@ const QuestionForm = ({ content }) => {
     } else {
       setConnectionError("Not connected to the server. Trying to reconnect...");
       connectWebSocket(); // Attempt to reconnect
+    }
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(data);
+      alert('Text copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
     }
   };
 
@@ -307,10 +335,10 @@ const QuestionForm = ({ content }) => {
         <div className="flex     flex-col items-center justify-center p-4">
           {currentUrl && <img src={currentUrl} alt="Selected" />}
 
-          <form className="w-[90vw]   " onSubmit={handleSubmit}>
+          <form className="w-[60vw]   " onSubmit={handleSubmit}>
             <div>
             </div>
-            <div className="flex items-center  border-2 border-black w-[90vw] sm:w-[70vw] px- py-1 rounded-2xl mb-4">
+            <div className="flex items-center  border-2 border-black w-[60vw] sm:w-[60vw] px- py-1 rounded-2xl mb-4">
               <input
                 class="appearance-none bg-transparent  w-full text-gray-900 mr-3 py-1 px-2 leading-tight focus:outline-none h-16 "
                 type="text"
@@ -356,16 +384,15 @@ const QuestionForm = ({ content }) => {
             )}
             {data && useLatex && (
               <div className='flex gap-x-4 text-gray-700 mt-5'>
-                <BiSolidLike size={20} />
-                <BiSolidDislike size={20} />
-                <FaCopy size={20} />
-                <FaShareFromSquare size={20} />
+                <BiSolidLike size={20} className={`${actionTaken === 'liked' ? 'text-blue-500' : 'cursor-pointer'} ${actionTaken ? 'pointer-events-none' : ''}`} onClick={handleLike} />
+                <BiSolidDislike size={20} className={`${actionTaken === 'disliked' ? 'text-red-500' : 'cursor-pointer'} ${actionTaken ? 'pointer-events-none' : ''}`} onClick={handleDislike} />
+                <FaCopy size={20} onClick={handleCopy} />
               </div>
             )}
 
           </form>
 
-          {data && !isLoading && (
+          {data && useLatex && (
             <button className="bg-black mt-8 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200  font-medium rounded-full text-sm px-5 py-2.5 text-center text-white"
               onClick={handleNewQuestion}
             >

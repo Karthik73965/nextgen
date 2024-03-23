@@ -125,9 +125,9 @@ export default function Login() {
                 <SlLogin /> Login to your account
               </h2>
               <form className='my-[10vh]' onSubmit={handleSubmit}>
-                <div onClick={handleGoogleLogin} className='border-2 cursor-pointer p-2 rounded-lg border-gray-900 flex align-middle justify-center'>
+                {/* <div onClick={handleGoogleLogin} className='border-2 cursor-pointer p-2 rounded-lg border-gray-900 flex align-middle justify-center'>
                   <FcGoogle size={25} className='mr-7' /> Login with Google
-                </div>
+                </div> */}
                 <input
                   type='email'
                   id='email'

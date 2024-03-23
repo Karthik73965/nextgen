@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import signupImg from "../assests/signup/signup.png";
-import { useUserAuth } from "../UserAuth";
-import { auth } from "../firebase";
 import Navbar from '../components/Navbar';
 import axios from "axios";
 
 import { emailPasswordSignUp } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-import { doesSessionExist } from "supertokens-auth-react/recipe/session";
+import { doesSessionExist, getUserId } from "supertokens-auth-react/recipe/session";
 
 
 export default function Signup() {
-  const [step, setStep] = useState(1);
-  const [gender, setGender] = useState("");
-  const [standard, setStandard] = useState("");
-  const [acceptTnC, setAcceptTnC] = useState(false);
-  const [institute, setInstitute] = useState("");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -31,7 +24,6 @@ export default function Signup() {
   useEffect(() => {
     const checkSession = async () => {
       const sessionExists = await doesSessionExist();
-      // Immediately act on the session existence check
       if (sessionExists) {
         navigate("/dashboard");
       }
@@ -71,7 +63,7 @@ export default function Signup() {
       } else {
         // sign up successful. The session tokens are automatically handled by
         // the frontend SDK.
-        window.location.href = "/dashboard"
+        window.location.href = "/createprofile"
       }
     } catch (err) {
       if (err.isSuperTokensGeneralError === true) {
@@ -82,14 +74,6 @@ export default function Signup() {
       }
     }
   }
-
-  const nextStep = () => {
-    setStep(step + 1);
-  };
-
-  const previousStep = () => {
-    setStep(step - 1);
-  };
 
   const validateF1Fields = () => {
     let newErrors = { ...errors }; // Start with current errors
@@ -145,64 +129,26 @@ export default function Signup() {
     return Object.keys(newErrors).length === 0; // Returns true if no errors
   };
 
-  const validateF2Fields = () => {
-    let newErrors = { ...errors }; // Start with current errors
-
-    // Validation for Gender
-    if (!gender) {
-      newErrors.gender = "Gender selection is required";
-    } else {
-      delete newErrors.gender;
-    }
-
-    // Validation for Standard
-    if (!standard) {
-      newErrors.standard = "Academic standard is required";
-    } else {
-      delete newErrors.standard;
-    }
-
-    // Validation for Institute
-    if (!institute) {
-      newErrors.institute = "Institute name is required";
-    } else {
-      delete newErrors.institute;
-    }
-
-    // Validation for Accepting Terms and Conditions
-    if (!acceptTnC) {
-      newErrors.acceptTnC = "You must agree to the terms and conditions";
-    } else {
-      delete newErrors.acceptTnC;
-    }
-
-    setErrors(newErrors); // Update the state with the new or updated errors
-
-    return Object.keys(newErrors).length === 0; // Returns true if no errors
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (step == 1 && validateF1Fields()) {
-      nextStep();
-    } else if (step == 2 && validateF2Fields()) {
+    if (validateF1Fields()) {
       try {
         await signUpClicked(email, password);
-        navigate("/dashboard");
-        const uid = auth.currentUser.uid;
+        const uid = await getUserId();
         const data_obj = {
           uid: uid,
           username: userName,
           email: email,
           firstname: firstName,
           lastname: lastName,
-          gender: gender,
-          standard: standard,
-          institute: institute,
+          gender: "",
+          standard: "",
+          institute: "",
+          country: "",
+          dob: ""
         };
 
-        // const resp = await axios.post("http://localhost:5000/users", data_obj);
-        // console.log(resp);
+        const resp = await axios.post("http://localhost:5000/users", data_obj);
       } catch (error) {
         console.error(error);
       }
@@ -236,206 +182,83 @@ export default function Signup() {
             />
           </section>
           <section className="sm:w-1/2 p-8">
-            {step === 1 && (
-              // Step 1 form inputs
-              <div>
-                <h2 className="text-3xl font-semibold text-center mb-8">
-                  <span role="img" aria-label="party popper">
-                    🎉
-                  </span>
-                  <span className="border-b-2 border-gray-  00">
-                    Create Your Account Now
-                  </span>
-                </h2>
-                <form onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <input
-                      type="text"
-                      id="firstName"
-                      placeholder="First Name"
-                      className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                    <input
-                      type="text"
-                      id="lastName"
-                      placeholder="Last Name"
-                      className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </div>
+            <div>
+              <h2 className="text-3xl font-semibold text-center mb-8">
+                <span role="img" aria-label="party popper">
+                  🎉
+                </span>
+                <span className="border-b-2 border-gray-  00">
+                  Create Your Account Now
+                </span>
+              </h2>
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-2 gap-4 mb-4">
                   <input
                     type="text"
-                    id="username"
-                    placeholder="Enter username"
-                    className="border w-full p-2 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
+                    id="firstName"
+                    placeholder="First Name"
+                    className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Email"
-                    className="border w-full p-2 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <input
-                      type="password"
-                      id="password"
-                      placeholder="Enter password"
-                      className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <input
-                      type="password"
-                      id="confirmPassword"
-                      placeholder="Confirm password"
-                      className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                      onChange={(e) => setcnfPassword(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="flex justify-between items-center">
-                    <Link
-                      to="/login"
-                      className="text-indigo-600 hover:text-indigo-800"
-                    >
-                      Already have an account? Login
-                    </Link>
-                    <button
-                      type="submit"
-                      className="bg-black font-medium rounded-full text-sm px-5 py-2 text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-                    >
-                      Next
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-            {step === 2 && (
-              <div>
-                <form onSubmit={handleSubmit}>
-                  <h2 className="text-3xl font-semibold text-center mb-8">
-                    <span role="img" aria-label="party popper">
-                      🎉
-                    </span>
-                    <span className="border-b-2 border-gray-  00">
-                      You are One step to go{" "}
-                    </span>
-                  </h2>
-                  <label className="font-bold "> What is your Gender :</label>
-                  <div className="flex justify-around my-2  ">
-                    <div
-                      className={`${gender === "male" ? "bg-gray-300" : ""
-                        }  rounded-full border-2  p-3`}
-                      onClick={() => {
-                        setGender("male");
-                      }}
-                    >
-                      Male
-                    </div>
-                    <div
-                      className={`${gender === "female" ? "bg-gray-300" : ""
-                        } rounded-full  border-2  p-3`}
-                      onClick={() => {
-                        setGender("female");
-                      }}
-                    >
-                      Female
-                    </div>
-                    <div
-                      className={`${gender === "denied" ? "bg-gray-300" : ""
-                        } rounded-full border-2 p-3`}
-                      onClick={() => {
-                        setGender("denied");
-                      }}
-                    >
-                      Not Say
-                    </div>
-                  </div>
-                  <label className="font-bold ">
-                    {" "}
-                    What is your current academic standard :
-                  </label>
-                  <div className="flex justify-around my-2  ">
-                    <div
-                      className={`${standard === "10th" ? "bg-gray-300" : ""
-                        }  rounded-full  border-2  p-3`}
-                      onClick={() => {
-                        setStandard("10th");
-                      }}
-                    >
-                      10 th
-                    </div>
-                    <div
-                      className={`${standard === "ug" ? "bg-gray-300" : ""
-                        } rounded-full  border-2  p-3`}
-                      onClick={() => {
-                        setStandard("ug");
-                      }}
-                    >
-                      UG
-                    </div>
-                    <div
-                      className={`${standard === "grad" ? "bg-gray-300" : ""
-                        } rounded-full  border-2  p-3`}
-                      onClick={() => {
-                        setStandard("grad");
-                      }}
-                    >
-                      Graduate
-                    </div>
-                  </div>
-
-                  <label className="font-bold mt-2 ">
-                    {" "}
-                    Where are you currently studying at :
-                  </label>
                   <input
                     type="text"
-                    id="insName"
-                    placeholder="Enter Institute name"
-                    className="border w-full p-2 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500"
-                    value={institute}
-                    onChange={(e) => setInstitute(e.target.value)}
+                    id="lastName"
+                    placeholder="Last Name"
+                    className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center mb-6">
-                      <input
-                        type="checkbox"
-                        id="termsAndConditions"
-                        className="mx-2"
-                        name="checkbox"
-                        value={acceptTnC}
-                        onChange={(e) => setAcceptTnC(e.target.checked)}
-                      />
-                      <label htmlFor="termsAndConditions">
-                        Agree to our terms and conditions
-                      </label>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-around">
-                    <button
-                      type="button"
-                      className="bg-black font-medium rounded-full text-sm px-5 py-2 text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-                      onClick={previousStep}
-                    >
-                      Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="bg-black font-medium rounded-full text-sm px-5 py-2 text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
+                </div>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Enter username"
+                  className="border w-full p-2 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  className="border w-full p-2 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                    className="border p-2 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                    onChange={(e) => setcnfPassword(e.target.value)}
+                  />
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <Link
+                    to="/login"
+                    className="text-indigo-600 hover:text-indigo-800"
+                  >
+                    Already have an account? Login
+                  </Link>
+                  <button
+                    type="submit"
+                    className="bg-black font-medium rounded-full text-sm px-5 py-2 text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+                  >
+                    Next
+                  </button>
+                </div>
+              </form>
+            </div>
           </section>
         </div>
       </div>
