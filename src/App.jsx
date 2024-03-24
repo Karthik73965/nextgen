@@ -44,19 +44,19 @@ export default function App() {
 
     <Routes>
       <Route exact path='/' element={<Home />} />
-      <Route exact path='/dashboard' element={<Dashboard />} />
-      <Route exact path='/Aichat' element={<AiChar />} />
+      <Route exact path='/dashboard' element={<Dashboard />} /> 
+      {/* <Route exact path='/Aichat' element={<AiChar />} />
       <Route exact path='/discussions' element={<Disscussions />} />
       <Route exact path='/discussions/id' element={<Individualdisscussion />} />
-      <Route exact path='/chathistory' element={<Chathistory />} />
-      <Route exact path='/About' element={<About />} />
-      <Route exact path='/blogs' element={<Blogs />} />
+      <Route exact path='/chathistory' element={<Chathistory />} /> */}
+      {/* <Route exact path='/About' element={<About />} /> */}
+      {/* <Route exact path='/blogs' element={<Blogs />} /> */}
       <Route exact path='/Signup' element={<SignupForm />} />
       <Route exact path='/login' element={<Login />} />x
       <Route exact path='/profile' element={<Profile />} />
-      <Route exact path='/profileEdit' element={<ProfileEdit />} />
+      {/* <Route exact path='/profileEdit' element={<ProfileEdit />} />
       <Route exact path='/CreateProfile' element={<CreateProfile />} />
-      <Route exact path='/Faq' element={<Faq />} />
+      <Route exact path='/Faq' element={<Faq />} /> */}
       <Route exact path='/callback/google' element={<GoogleCallback />}></Route>
       <Route
         path="*"

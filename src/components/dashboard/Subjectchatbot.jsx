@@ -315,18 +315,19 @@ const QuestionForm = ({ content }) => {
         <div className='h-[30px]'></div>
         <>
           <div className='grid items-center  '>
-            <div className='p-3 bg-white  sm:hidden  border-2 text-sm flex border-black rounded-xl w-[40vw] mb-6 ml-[50vw] ' onClick={toggleDrawer(true)}>Change Subject <RxPencil2 className='ml-2' size={25} />
+            {/*  need to add flex while implementing  */}
+            <div className='p-3 bg-white  hidden  border-2 text-sm  border-black rounded-xl w-[40vw] mb-6 ml-[50vw] ' onClick={toggleDrawer(true)}>Change Subject <RxPencil2 className='ml-2' size={25} />
             </div>
             <Drawer open={open} onClose={toggleDrawer(false)}>
               {DrawerList}
             </Drawer>
-            <center>    <h1 className=" block sm:hidden  font-bold text-4xl mb-4 text-gradient uppercase" >
+            <center>    <h1 className="hidden  font-bold text-4xl mb-4 text-gradient uppercase" >
               {activesubject == "Civil" || activesubject == "Chemical" || activesubject == "Electrical" || activesubject == "Mechanical" || activesubject == "IndustrialW" ? `${activesubject} Enginerring` : activesubject}
             </h1>
             </center>
 
-            <h1 className="text-lg sm:text-4xl hidden sm:block  font-bold mb-4 text-gradient" >The evolution of 24/7 study starts here</h1>
-            <p className="mb-4 text-slate-900 text-wrap font-bold hidden sm:block">Any question. Any subject. Get instant, step-by-step solutions the moment you need them.</p>
+            <h1 className="text-lg sm:text-4xl      font-bold mb-4 text-gradient" >The evolution of 24/7 study starts here</h1>
+            <p className="mb-4 text-slate-900 text-wrap font-bold hidden sm:block    ">Any question. Any subject. Get instant, step-by-step solutions the moment you need them.</p>
           </div>
           {connectionError && <p className="text-red-500 text-center">{connectionError}</p>}
         </>

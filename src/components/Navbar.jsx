@@ -89,9 +89,16 @@ const Navbar = ({ postion }) => {
             <header className={`fixed font-semibold  text-black w-full z-10 ${isScrolled ? 'bg-white shadow-md ' : 'bg-white sm:bg-transparent '} transition-all`}>
                 <nav className="flex items-center  justify-around    pb-0 sm:pb-4">
                     {/* Logo */}
-                    <div className="logo  md:mr-[20vw]  pb-5 sm:pb-0">
+                    <div className="logo sm:mr-[18vw]  md:mr-[40vw]  pb-5 sm:pb-0">
                         <Link to="/">
-                            <img src={img} className='h-[70px] w-[250px]' loading='lazy' />
+                            <div className='flex'>
+                                <Link to="/">
+                                    <img src={img} className='h-[70px] w-[250px]' loading='lazy' />
+                                </Link>
+                                <span className=' mt-4 ml-2  border-2 border-black rounded-full font- bg-black text-white h-[30px] px-2'>
+                                    Beta
+                                </span>
+                            </div>
                         </Link>
                     </div>
 
@@ -100,7 +107,7 @@ const Navbar = ({ postion }) => {
                     <div className="hidden md:flex mt-2 space-x-4 ">
                         {/* Add dropdown logic and items */}
                         {/* Dropdown */}
-                        <Link to={`${login ? "/dashboard" : "/login"} `}
+                        {/* <Link to={`${login ? "/dashboard" : "/login"} `}
                             className="dropdown flex justify-center items-center sm:gap- 4 cursor-pointer"
                             onMouseEnter={() => setIsDropdownOpen(true)}
                             onMouseLeave={() => setIsDropdownOpen(false)}
@@ -147,24 +154,24 @@ const Navbar = ({ postion }) => {
                                     </div>
                                 </div>
                             )}
-                        </Link>
+                        </Link> */}
 
 
                         {/* <div className="dropdown">Pricing</div> */}
-                        <Link to={'/faq'} className={`${postion == "dash" ? "hidden" : "block"}`}>
+                        {/* <Link to={'/faq'} className={`${postion == "dash" ? "hidden" : "block"}`}>
                             <div className="dropdown flex justify-center sm:gap-1  align-middle"><span>FAQ's</span></div>
                         </Link>
                         <Link to={'/About'} className={`${postion == "dash" ? "hidden" : "block"}`} >
                             <div className="dropdown flex justify-center sm:gap-1  align-middle"><span>About</span></div>
-                        </Link>
+                        </Link> */}
 
                         {/*for dash*/}
-                        <Link to={'/discussions'} className={`${postion !== "dash" ? "hidden" : "block"}`}>
+                        {/* <Link to={'/discussions'} className={`${postion !== "dash" ? "hidden" : "block"}`}>
                             <div className="dropdown flex justify-center sm:gap-1  align-middle"><span>Discussions</span></div>
                         </Link>
                         <Link to={'/chathistory'} className={`${postion !== "dash" ? "hidden" : "block"}`} >
                             <div className="dropdown flex justify-center sm:gap-1  align-middle"><span>History</span></div>
-                        </Link>
+                        </Link> */}
 
                     </div>
 
@@ -212,7 +219,7 @@ const Navbar = ({ postion }) => {
 
                             </>
                         ) : (
-                            <Link to="/login">
+                            <Link to="/signup">
                                 <button
                                     type="button"
                                     className="bg-black ml-9  font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white"

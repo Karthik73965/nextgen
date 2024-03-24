@@ -63,7 +63,7 @@ export default function Signup() {
       } else {
         // sign up successful. The session tokens are automatically handled by
         // the frontend SDK.
-        window.location.href = "/createprofile"
+        // window.location.href = "/createprofile"
       }
     } catch (err) {
       if (err.isSuperTokensGeneralError === true) {
@@ -254,7 +254,7 @@ export default function Signup() {
                     type="submit"
                     className="bg-black font-medium rounded-full text-sm px-5 py-2 text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                   >
-                    Next
+                    Continue
                   </button>
                 </div>
               </form>

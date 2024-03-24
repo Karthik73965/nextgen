@@ -62,10 +62,8 @@ const Sidebar = () => {
       <div className='h-[70px]'></div>
       <div className='min-h-[80vh]' style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div className='sm:h-[100px] mb-11'></div>
-        <div className='hidden sm:block ' style={{ borderRight: '1px solid #ccc' }}>
-          <div className=' px-[40px] py-[10px] text-3xl font-bold '>
-
-          </div>
+        <div className='hidden  ' style={{ borderRight: '1px solid #ccc' }}>
+          
           <center className='text-gradient px-[40px] py-[10px] text-3xl font-bold'><span className='border-b-s border-gray-400'>Subjects</span></center>
           {/* options section   -----------------------------------------------------------------------------------------s      */}
           <div className=''>
@@ -185,7 +183,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <center className=' w-[100vw] sm:w-[80%]' style={{}}>
+        <center className=' w-[100vw] ' style={{}}>
           <Subjechatbot />
         </center>
       </div>
