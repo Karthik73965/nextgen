@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar'
 import Problems from '../components/About/Problems'
 // import Review from '../components/utils/Review'
 import Review from '../components/Home/Reviews'
-import BetaFotter from '../components/BetaFotter'
+
 export default function Home() {
   return (
    <>
@@ -22,9 +22,7 @@ export default function Home() {
       <Problems/>
       <Feautures/>
       <Review/>
-      
-       */}
-       <Fotter/>
+      <Fotter/> */}
     </div>
    </>
   )

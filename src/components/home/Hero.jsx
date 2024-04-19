@@ -38,7 +38,7 @@ export default function Hero() {
       />
   </div>
 
-          <p className='my-8 mb-10 sm:text-xl md:w-[700px] font-semibold bg-gray-200 p-3 border-2 border-gray-300 shadow-lg rounded-full text:sm text-black'>Any question. Any subject. Get instant, step-by-step solutions </p>
+          <p className='my-8 mb-10 sm:text-xl md:w-[700px] font-semibold bg-gray-200 p-3 border-2 border-gray-300 shadow-lg rounded-full text:sm text-black'>Any Mathematics Question . Get instant, step-by-step solutions </p>
          <Link to={'/login'} className='m-4'>
          <button type="button" className="relative border-4 border-gray-500 text-white bg-black focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-full text-sm px-5 py-2.5 text-center ">
             <div className='flex items-center justify-center text-xl gap-x-3'>
